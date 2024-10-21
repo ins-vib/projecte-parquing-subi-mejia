@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plaza', function (Blueprint $table) {
             $table->id();
             $table->set('tipus',['coche', 'moto','other']);
-            $table->set('estat',['ocupat', 'buit']);
+            $table->boolean('estat');
             $table->timestamps();
         });
     }
