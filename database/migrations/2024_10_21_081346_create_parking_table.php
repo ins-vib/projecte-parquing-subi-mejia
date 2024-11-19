@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plaza', function (Blueprint $table) {
+        Schema::create('parkings', function (Blueprint $table) {
             $table->id();
-            $table->set('tipus',['coche', 'moto','other']);
-            $table->boolean('estat');
+            $table->String('name');
+            $table->String('address');
+            $table->String('ciutat');
+            $table->integer('capacitat');
+            $table->float('latitud');
+            $table->float('longitud');
+            $table->time('horaObertura');
+            $table->time('horaTancament');
             $table->timestamps();
         });
     }
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plaza');
+        Schema::dropIfExists('parking');
     }
 };
