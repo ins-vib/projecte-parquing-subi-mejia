@@ -67,7 +67,7 @@ class ZonaSeeder extends Seeder
                     'parking_id' => $parkingId,
                     'created_at' => now(),
                     'updated_at' => now(),
-                ]);
+                ]);  
             }
         }
     }
