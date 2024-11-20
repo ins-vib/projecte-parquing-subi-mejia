@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(ParkingSeeder::class);
+        $this->call(ZonaSeeder::class);
+
 
     }
 }

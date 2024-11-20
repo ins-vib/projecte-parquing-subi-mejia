@@ -24,6 +24,7 @@
             <td>{{$parking->longitud}}</td>
             <td>{{$parking->horaObertura}}</td>
             <td>{{$parking->horaTancament}}</td>
+            <td><a href="/parkings/informacio/{{$parking->id}}">Mostrar Informació</a></td>
         </tr>
         @endforeach
     </tbody>

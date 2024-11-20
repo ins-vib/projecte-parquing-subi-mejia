@@ -15,4 +15,9 @@ class ParkingController extends Controller
         return view("parkings.llista")->with('parkings',$parkings);
     }
 
+    public function informacio($id) {
+        $parkings=Parking::find($id);
+        return view("parkings.informacio")->with('parkings', $parkings);
+    }
+
 }
