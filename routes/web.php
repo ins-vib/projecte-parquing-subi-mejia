@@ -24,10 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/parkings', [ParkingController::class,'llista'])->name('parkings.llista');
 Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
 
-
-
-Route::get('/zona', [ZonaController::class,'llista'])->name('zona.llista');
-
+Route::get('/zona/llista/{id}', [ZonaController::class,'llista'])->name('zona.llista');
 
 Route::get('/plaza', [PlazaController::class,'llista'])->name('plaza.llista');
 

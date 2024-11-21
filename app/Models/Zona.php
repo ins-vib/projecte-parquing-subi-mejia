@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parking extends Model
+class Zona extends Model
 {
     use HasFactory;
-
-    public function zonas() {
-        return $this->hasMany(Zona::class, 'parking_id');
-    }
 }
