@@ -1,3 +1,11 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Vehículos') }}
+        </h2>
+    </x-slot>
+
+
 <table>
     <thead>
         <tr>
@@ -29,3 +37,6 @@
         @endforeach
     </tbody>
 </table>
+
+
+</x-app-layout>
