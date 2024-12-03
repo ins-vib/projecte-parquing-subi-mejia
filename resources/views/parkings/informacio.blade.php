@@ -1,3 +1,10 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Parkings') }}
+        </h2>
+    </x-slot>
+
 <h2>Detalls Parking {{$parkings->name}}</h2>
 
 <table>
@@ -44,3 +51,5 @@ Zona del parking:
     </tr>
     @endforeach
 </table>
+
+</x-app-layout>

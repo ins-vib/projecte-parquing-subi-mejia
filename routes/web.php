@@ -21,13 +21,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+//PARKINGS
 Route::get('/parkings', [ParkingController::class,'llista'])->name('parkings.llista');
 Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
+Route::get('/parkings/afegir', [ParkingController::class,'formAfegir'])->name('parkings.formAfegir');
+Route::post('/parkings/afegir', [ParkingController::class,'afegir'])->name('parkings.afegir');
 
+
+
+//ZONES
 Route::get('/zona/llista/{id}', [ZonaController::class,'llista'])->name('zona.llista');
 
+
+//PLAÇES
 Route::get('/plaza', [PlazaController::class,'llista'])->name('plaza.llista');
+
 
 Route::get('/detecta-matricula', [PlateController::class, 'detectaMatricula']);
 

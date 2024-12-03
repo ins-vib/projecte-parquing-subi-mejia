@@ -31,9 +31,9 @@ class PlateController extends Controller
             // $matricula = $this->extraureMatriculaOCR($response->body());
           
             // Passar la URL de la imatge i la matrícula a la vista
-            // return view('matricula.detecta', compact('imageUrl', 'matricula'));
+            return view('matricula.detecta', compact('imageUrl', 'matricula'));
             // Matrícula no detectada
-            return response()->json(['matricula' => $matricula], 200);
+            // return response()->json(['matricula' => $matricula], 200);
         } else {
             $error = $response->json('ErrorMessage') ?? 'Error desconegut a l\'API OCR';               
             return response()->json(['error' => 'No s\'ha pogut obtenir la imatge.'], 500);
