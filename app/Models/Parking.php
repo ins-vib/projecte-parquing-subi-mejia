@@ -12,4 +12,15 @@ class Parking extends Model
     public function zonas() {
         return $this->hasMany(Zona::class, 'parking_id');
     }
+
+    protected $fillable = [
+        'name',
+        'address',
+        'ciutat',
+        'capacitat',
+        'longitud',
+        'latitud',
+        'horaObertura',
+        'horaTancament',
+    ];
 }

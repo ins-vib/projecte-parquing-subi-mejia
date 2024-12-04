@@ -28,30 +28,20 @@ class ParkingController extends Controller
 
     public function afegir(Request $request) {
 
-        $validated = $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'ciutat' => 'required',
-            'capacitat' => 'required',
-            'latitud' => 'required',
-            'longitud' => 'required',
-            'horaObertura' => 'required',
-            'horaTancament' => 'required',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'ciutat' => 'required|string|max:255',
+            'capacitat' => 'required|integer',
+            'longitud' => 'required|numeric',
+            'latitud' => 'required|numeric',
+            'horaObertura' => 'required|date_format:H:i',
+            'horaTancament' => 'required|date_format:H:i',
         ]);
-        
-        $parkings = new Parking();
 
-        $parkings->name = $validated['name'];
-        $parkings->address = $validated['adress'];
-        $parkings->ciutat = $validated['ciutat'];
-        $parkings->capacitat = $validated['capacitat'];
-        $parkings->latitud = $validated['latitud'];
-        $parkings->longitud = $validated['nombre'];
-        $parkings->horaObertura = $validated['horaObertura'];
-        $parkings->horaTancament = $validated['horaTancament'];
+        Parking::create($validatedData);
         
-        $parkings->save();
-        return redirect("/parkings");
+        return redirect('/parkings');
     }
 
 }
