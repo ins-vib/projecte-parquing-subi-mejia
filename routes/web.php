@@ -21,12 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//PARKINGS
-Route::get('/parkings', [ParkingController::class,'llista'])->name('parkings.llista');
-Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
-Route::get('/parkings/afegir', [ParkingController::class,'formAfegir'])->name('parkings.formAfegir');
-Route::post('/parkings/afegir', [ParkingController::class,'afegir'])->name('parkings.afegir');
-
+//PARKINGS DES DE ADMIN
+Route::group(['middleware'=>['auth','role:admin']], function() {
+    Route::get('/parkings', [ParkingController::class,'llista'])->name('parkings.llista');
+    Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
+    Route::get('/parkings/afegir', [ParkingController::class,'formAfegir'])->name('parkings.formAfegir');
+    Route::post('/parkings/afegir', [ParkingController::class,'afegir'])->name('parkings.afegir');
+});
 
 
 //ZONES

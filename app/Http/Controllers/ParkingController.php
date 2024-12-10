@@ -44,4 +44,8 @@ class ParkingController extends Controller
         return redirect('/parkings');
     }
 
+    public function returnNormal() {
+        return redirect()->route('dashboard');
+    }
+
 }

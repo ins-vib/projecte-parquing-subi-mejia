@@ -16,9 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @if(Auth::user()->isAdmin)
                     <x-nav-link :href="route('parkings.llista')" :active="request()->routeIs('parkings.llista')">
                         {{ __('Parkings') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
