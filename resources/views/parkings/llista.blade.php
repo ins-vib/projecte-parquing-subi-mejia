@@ -8,7 +8,6 @@
 
 <div style="margin: 1%">
     <a href="/parkings/afegir" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir Parking</a> 
-    <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar Parking</a>
 </div>
 
 
@@ -23,7 +22,7 @@
                 <th scope="col" class="px-6 py-3">Capacitat</th>
                 <th scope="col" class="px-6 py-3">Hora Obertura</th>
                 <th scope="col" class="px-6 py-3">Hora Tancament</th>
-                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" colspan="3" class="px-6 py-3"></th>
             </tr>
         </thead>
         <tbody >
@@ -37,6 +36,8 @@
                 <td class="px-6 py-4">{{$parking->horaObertura}}</td>
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$parking->horaTancament}}</td>
                 <td class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/informacio/{{$parking->id}}">Mostrar Informació</a></td>
+                <td class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/editar/{{$parking->id}}">Editar Informació</a></td>
+                <td class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="/parkings/eliminar/{{$parking->id}}">Eliminar</a></td>
             </tr>
             @endforeach
         </tbody>

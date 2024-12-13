@@ -22,39 +22,11 @@ class ZonaSeeder extends Seeder
                 ['nom' => 'Planta 2', 'capacitatTotal' => 100, 'estat' => true],
             ],
             2 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 75, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 75, 'estat' => true],
+                ['nom' => 'Planta 1', 'capacitatTotal' => 150, 'estat' => true],
             ],
             3 => [ 
                 ['nom' => 'Planta 1', 'capacitatTotal' => 150, 'estat' => true],
                 ['nom' => 'Planta 2', 'capacitatTotal' => 150, 'estat' => true],
-            ],
-            4 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 60, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 60, 'estat' => false],
-            ],
-            5 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 125, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 125, 'estat' => true],
-            ],
-            6 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 90, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 90, 'estat' => true],
-            ],
-            7 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 50, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 50, 'estat' => true],
-            ],
-            8 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 110, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 110, 'estat' => true],
-            ],
-            9 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 90, 'estat' => true],
-            ],
-            10 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 250, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 250, 'estat' => true],
             ],
         ];
 

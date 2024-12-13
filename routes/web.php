@@ -27,6 +27,9 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
     Route::get('/parkings/afegir', [ParkingController::class,'formAfegir'])->name('parkings.formAfegir');
     Route::post('/parkings/afegir', [ParkingController::class,'afegir'])->name('parkings.afegir');
+    Route::get('/parkings/editar/{id}', [ParkingController::class,'formEditar'])->name('parkings.formEditar');
+    Route::post('/parkings/editar/{id}', [ParkingController::class,'editar'])->name('parkings.editar');
+    Route::get('/parkings/eliminar/{id}', [ParkingController::class,'eliminar'])->name('parkings.eliminar');  
 });
 
 
