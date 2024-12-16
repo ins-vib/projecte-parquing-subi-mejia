@@ -39,18 +39,21 @@
          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
          crossorigin=""></script>
         <script>
-            // Inicializa el mapa
             const map = L.map('map').setView([41.3851, 2.1734], 13);
     
-            // Añade un tile layer al mapa
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
     
-            // Añade un marcador al mapa
             L.marker([41.3851, 2.1734]).addTo(map)
                 .bindPopup('A pretty CSS popup.<br> Easily customizable.')
                 .openPopup();
+
+
+
+
+
+                
         </script>
     </body>
     </html>
