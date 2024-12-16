@@ -54,17 +54,17 @@ class ParkingController extends Controller
         return view("parkings.editar")->with('parkings', $parkings);
     }
 
-    public function editar(Request $request) {
+    public function editar(Request $request, $id) {
 
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'ciutat' => 'required|string|max:255',
-            'capacitat' => 'required|integer',
-            'longitud' => 'required|numeric',
-            'latitud' => 'required|numeric',
-            'horaObertura' => 'required|date_format:H:i',
-            'horaTancament' => 'required|date_format:H:i|after:horaObertura',
+            'name' => 'required',
+            'address' => 'required',
+            'ciutat' => 'required',
+            'capacitat' => 'required',
+            'longitud' => 'required',
+            'latitud' => 'required',
+            'horaObertura' => 'required',
+            'horaTancament' => 'required',
         ]);
 
         $parking = Parking::find($id);

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ParkingController;
 use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\PlazaController;
+use App\Http\Controllers\MapaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlateController;
 
@@ -39,6 +40,7 @@ Route::get('/zona/llista/{id}', [ZonaController::class,'llista'])->name('zona.ll
 
 //PLAÇES
 Route::get('/plaza', [PlazaController::class,'llista'])->name('plaza.llista');
+
 
 
 Route::get('/detecta-matricula', [PlateController::class, 'detectaMatricula']);
