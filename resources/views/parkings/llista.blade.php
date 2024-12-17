@@ -4,7 +4,18 @@
             {{ __('Parkings') }}
         </h2>
     </x-slot>
-
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <style>
+        #map {
+            height: 400px;
+            width: 90%;
+            margin: auto;
+        }
+    </style>
+</head>
 
 <div style="margin: 1%">
     <a href="/parkings/afegir" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir Parking</a> 
@@ -43,6 +54,27 @@
         </tbody>
     </table>
 </div>
+
+
+<body>
+    <div id="map" style="border-radius: 20px"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script>
+        const map = L.map('map').setView([41.57235, 1.53235], 8);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        @foreach($parkings as $parking)
+            L.marker([{{ $parking->latitud }}, {{ $parking->longitud }}]).addTo(map)
+                .bindPopup('{{ $parking->name }}');
+        @endforeach
+
+    </script>
+</body>
 
 
 </x-app-layout>
