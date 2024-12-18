@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Zona extends Model
 {
     use HasFactory;
+
+    public function parking(){
+    return $this->belongsTo(Parking::class);
+    }
+
+    protected $fillable = [
+        'parking_id',
+        'nom',
+        'capacitatTotal',
+        'estat',
+    ];
 }

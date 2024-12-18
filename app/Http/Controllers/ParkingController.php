@@ -37,9 +37,23 @@ class ParkingController extends Controller
             'latitud' => 'required|numeric',
             'horaObertura' => 'required|date_format:H:i',
             'horaTancament' => 'required|date_format:H:i',
+            'num_plantes' => 'required|integer|min:1',
         ]);
 
-        Parking::create($validatedData);
+        $parking = Parking::create($validatedData);
+
+        $numPlantes = $validatedData['num_plantes'];
+        $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
+
+        for ($i = 1; $i <= $numPlantes; $i++) {
+            Zona::create([
+                'parking_id' => $parking->id,
+                'nom' => 'Planta ' . $i,
+                'capacitatTotal' => $capacitatPerPlanta, 
+                'estat' => true, 
+            ]);
+        }
+
         
         return redirect('/parkings')->with('parkings.llista');
     }
@@ -67,15 +81,11 @@ class ParkingController extends Controller
             'horaTancament' => 'required',
         ]);
 
-        $parking = Parking::find($id);
-        if (!$parking) {
-            return redirect('/parkings')->with('error', 'El parking no existeix.');
-        }
-        $parking->update($validatedData);
         return redirect('/parkings');
     }
 
     public function eliminar($id){
+        Zona::where('parking_id', $id)->delete();
 
         $parking = Parking::findOrFail($id);
 

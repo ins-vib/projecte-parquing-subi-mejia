@@ -10,7 +10,7 @@ class Parking extends Model
     use HasFactory;
 
     public function zonas() {
-        return $this->hasMany(Zona::class, 'parking_id');
+        return $this->hasMany(Zona::class);
     }
 
     protected $fillable = [
