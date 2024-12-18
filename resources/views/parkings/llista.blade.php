@@ -46,9 +46,9 @@
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$parking->capacitat}}</td>
                 <td class="px-6 py-4">{{$parking->horaObertura}}</td>
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$parking->horaTancament}}</td>
-                <td class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/informacio/{{$parking->id}}">Mostrar Informació</a></td>
-                <td class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/editar/{{$parking->id}}">Editar Informació</a></td>
-                <td class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="/parkings/eliminar/{{$parking->id}}">Eliminar</a></td>
+                <td class="px-6 py-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/informacio/{{$parking->id}}">Mostrar Informació</a></td>
+                <td class="px-6 py-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="/parkings/editar/{{$parking->id}}">Editar Informació</a></td>
+                <td class="px-6 py-4 font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="/parkings/eliminar/{{$parking->id}}">Eliminar</a></td>
             </tr>
             @endforeach
         </tbody>
