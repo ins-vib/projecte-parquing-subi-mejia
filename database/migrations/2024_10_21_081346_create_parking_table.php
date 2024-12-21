@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('longitud');
             $table->time('horaObertura');
             $table->time('horaTancament');
+            $table->integer('num_plantes');
             $table->timestamps();
         });
     }

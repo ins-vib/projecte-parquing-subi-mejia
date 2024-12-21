@@ -22,5 +22,6 @@ class Parking extends Model
         'latitud',
         'horaObertura',
         'horaTancament',
+        'num_plantes',
     ];
 }

@@ -79,7 +79,48 @@ class ParkingController extends Controller
             'latitud' => 'required',
             'horaObertura' => 'required',
             'horaTancament' => 'required',
+            'num_plantes' => 'required',
         ]);
+
+        $parkings=Parking::find($id);
+
+        $parkings->name = $validatedData['name'];
+        $parkings->address = $validatedData['address'];
+        $parkings->ciutat = $validatedData['ciutat'];
+        $parkings->capacitat = $validatedData['capacitat'];
+        $parkings->longitud = $validatedData['longitud'];
+        $parkings->latitud = $validatedData['latitud'];
+        $parkings->horaObertura = $validatedData['horaObertura'];
+        $parkings->horaTancament = $validatedData['horaTancament'];
+
+        $parkings->save();
+
+        $numPlantes = $validatedData['num_plantes'];
+        $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
+
+        $zonesExistents = $parkings->zonas;
+
+        if ($zonesExistents->count() > $numPlantes) {
+            $zonesExistents->slice($numPlantes)->each(function($zona) {
+                $zona->delete();
+            });
+        }
+
+        foreach ($zonesExistents as $index => $zona) {
+            if ($index < $numPlantes) {
+                $zona->capacitatTotal = $capacitatPerPlanta;
+                $zona->save();
+            }
+        }
+
+        for ($i = $zonesExistents->count(); $i < $numPlantes; $i++) {
+            Zona::create([
+                'parking_id' => $parkings->id,
+                'nom' => 'Planta ' . ($i + 1),
+                'capacitatTotal' => $capacitatPerPlanta,
+                'estat' => true,
+            ]);
+    }
 
         return redirect('/parkings');
     }
