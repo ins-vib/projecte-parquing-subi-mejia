@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('plazas', function (Blueprint $table) {
             $table->id();
-            $table->set('tipus',['coche', 'moto','other']);
+            $table->enum('tipus',['coche', 'moto','other']);
             $table->boolean('estat');
             $table->foreignId('zona_id')->constrained();
             $table->timestamps();
