@@ -20,6 +20,14 @@
                     <x-nav-link :href="route('parkings.llista')" :active="request()->routeIs('parkings.llista')">
                         {{ __('Parkings') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('zona.llista')" :active="request()->routeIs('zona.llista')">
+                        {{ __('Plantes') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('plaza.llista')" :active="request()->routeIs('plaza.llista')">
+                        {{ __('Plaçes') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

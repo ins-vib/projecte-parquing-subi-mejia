@@ -27,7 +27,7 @@
         <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">Nom</th>
-                <th scope="col" class="px-6 py-3"> Adreça</th>
+                <th scope="col" class="px-6 py-3">Adreça</th>
                 <th scope="col" class="px-6 py-3">Ciutat</th>
                 <th scope="col" class="px-6 py-3">Capacitat</th>
                 <th scope="col" class="px-6 py-3">Hora Obertura</th>

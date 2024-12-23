@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//PARKINGS DES DE ADMIN
+//GESTIONS DES DE ADMIN
 Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/parkings', [ParkingController::class,'llista'])->name('parkings.llista');
     Route::get('/parkings/informacio/{id}', [ParkingController::class,'informacio'])->name('parkings.informacio');
@@ -30,15 +30,13 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/parkings/editar/{id}', [ParkingController::class,'formEditar'])->name('parkings.formEditar');
     Route::post('/parkings/editar/{id}', [ParkingController::class,'editar'])->name('parkings.editar');
     Route::get('/parkings/eliminar/{id}', [ParkingController::class,'eliminar'])->name('parkings.eliminar');  
+
+    
+    Route::get('/plantes', [ZonaController::class,'llista'])->name('zona.llista');
+
+
+    Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
 });
-
-
-//ZONES
-Route::get('/zona/llista/{id}', [ZonaController::class,'llista'])->name('zona.llista');
-
-
-//PLAÇES
-Route::get('/plaza', [PlazaController::class,'llista'])->name('plaza.llista');
 
 
 
