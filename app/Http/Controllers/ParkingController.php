@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Parking;
 use App\Models\Zona;
+use App\Models\Plaza;
 
 class ParkingController extends Controller
 {
@@ -46,14 +47,22 @@ class ParkingController extends Controller
         $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
 
         for ($i = 1; $i <= $numPlantes; $i++) {
-            Zona::create([
+            $zonas = Zona::create([
                 'parking_id' => $parking->id,
                 'nom' => 'Planta ' . $i,
                 'capacitatTotal' => $capacitatPerPlanta, 
                 'estat' => true, 
             ]);
-        }
 
+            for ($j = 1; $j <= $capacitatPerPlanta; $j++) {
+                Plaza::create([
+                    'numero' => 'Numero ' . $j,
+                    'tipus' => 'coche', 
+                    'estat' => true, 
+                    'zona_id' => $zonas->id,
+                ]);
+            }
+        }
         
         return redirect('/parkings')->with('parkings.llista');
     }
@@ -126,6 +135,7 @@ class ParkingController extends Controller
     }
 
     public function eliminar($id){
+        Plaza::whereIn('zona_id', Zona::where('parking_id', $id)->pluck('id'))->delete();
         Zona::where('parking_id', $id)->delete();
 
         $parking = Parking::findOrFail($id);

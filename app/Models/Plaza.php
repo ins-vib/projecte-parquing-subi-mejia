@@ -9,7 +9,12 @@ class Plaza extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tipus', 'estat', 'zona_id'];
+    protected $fillable = [
+        'numero',
+        'tipus', 
+        'estat', 
+        'zona_id'
+    ];
 
     public function zona()
     {

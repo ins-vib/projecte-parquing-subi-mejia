@@ -10,7 +10,11 @@ class Zona extends Model
     use HasFactory;
 
     public function parking(){
-    return $this->belongsTo(Parking::class);
+        return $this->belongsTo(Parking::class);
+    }
+
+    public function plazas() {
+        return $this->hasMany(Plaza::class);
     }
 
     protected $fillable = [
