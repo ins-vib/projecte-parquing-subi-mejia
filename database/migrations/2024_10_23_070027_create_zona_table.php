@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('zonas', function (Blueprint $table) {
             $table->id();
-            $table->string('nom', 20);
+            $table->string('nom', 50);
             $table->integer('capacitatTotal')->length(100);
             $table->boolean('estat');
             $table->timestamps();

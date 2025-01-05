@@ -20,4 +20,9 @@ class Plaza extends Model
     {
         return $this->belongsTo(Zona::class);
     }
+
+    public function parking()
+{
+    return $this->belongsTo(Parking::class);
+}
 }

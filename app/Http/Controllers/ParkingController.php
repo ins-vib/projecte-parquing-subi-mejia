@@ -49,7 +49,7 @@ class ParkingController extends Controller
         for ($i = 1; $i <= $numPlantes; $i++) {
             $zonas = Zona::create([
                 'parking_id' => $parking->id,
-                'nom' => 'Planta ' . $i,
+                'nom' => 'Planta ' . $parking->name . ' '. $i,
                 'capacitatTotal' => $capacitatPerPlanta, 
                 'estat' => true, 
             ]);
