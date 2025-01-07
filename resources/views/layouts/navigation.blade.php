@@ -29,6 +29,12 @@
                         {{ __('Plaçes') }}
                     </x-nav-link>
                     @endif
+
+                    @if(Auth::user()->isNormal)
+                    <x-nav-link :href="route('aparcar.aparcar')" :active="request()->routeIs('aparcar.aparcar')">
+                        {{ __('Aparcar') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

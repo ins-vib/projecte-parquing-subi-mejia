@@ -6,6 +6,7 @@ use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\PlazaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlateController;
+use App\Http\Controllers\AparcarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,13 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
+});
+
+
+
+//GESTIONS DES DE NORMAL
+Route::group(['middleware'=>['auth','role:normal']], function() {
+    Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
 });
 
 
