@@ -12,6 +12,7 @@
                 <th scope="col" class="px-6 py-3">Numero Plaça</th>
                 <th scope="col" class="px-6 py-3">id Planta</th>
                 <th scope="col" class="px-6 py-3">Tipus</th>
+                <th scope="col" class="px-6 py-3">Estat</th>
             </tr>
         </thead>
         <tbody >
@@ -20,7 +21,7 @@
                 <td class="px-6 py-4">{{$plaça->numero}}</td>
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$plaça->zona_id}}</td>
                 <td class="px-6 py-4">{{$plaça->tipus}}</td>
-            </tr>
+                <td class="px-6 py-4" style="border: solid black 1px; background-color: {{ $plaça->estat ? 'green' : 'red' }};"></td>
             @endforeach
         </tbody>
     </table>

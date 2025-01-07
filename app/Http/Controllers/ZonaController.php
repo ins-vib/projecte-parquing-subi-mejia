@@ -14,4 +14,5 @@ class ZonaController extends Controller
         $plantes = Zona::with('parking')->get();
         return view('zona.llista')->with('plantes', $plantes);
     }
+    
 }

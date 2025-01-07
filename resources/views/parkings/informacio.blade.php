@@ -48,7 +48,7 @@ Zona del parking:
 <table>
     @foreach($zonas as $zona)
     <tr >
-        <td><a href="/zona/llista/{{$zona->id}}">{{$zona->nom}}</a></td>
+        <td><a href="/plantes/llista/{{$zona->id}}">{{$zona->nom}}</a></td>
     </tr>
     @endforeach
 </table>
