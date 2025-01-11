@@ -1,11 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
+    <a href="{{ url()->previous() }}" >Tornar</a>
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Plantes
+            Plaçes {{$planta->nom}}
         </h2>
     </x-slot>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-black">
         <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
         <label for="table-search" class="sr-only">Search</label>
@@ -29,7 +31,6 @@
         
     </table>
 </div>
-
 
 
 </x-app-layout>

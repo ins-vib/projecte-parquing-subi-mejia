@@ -23,7 +23,7 @@
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$planta->nom}}</td>
                 <td class="px-6 py-4">{{$planta->capacitatTotal}}</td>
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$planta->estat}}</td>
-                <td class="px-6 py-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="">Plaçes</a></td>
+                <td class="px-6 py-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="{{ route('plaza.planta', ['id' => $planta->id]) }}">Plaçes</a></td>
             </tr>
             @endforeach
         </tbody>

@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+    <a href="/parkings" >Tornar</a>
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Detalls de {{$parkings->name}}
         </h2>
@@ -48,7 +49,7 @@ Zona del parking:
 <table>
     @foreach($zonas as $zona)
     <tr >
-        <td><a href="/plantes/llista/{{$zona->id}}">{{$zona->nom}}</a></td>
+        <td><a href="{{ route('plaza.planta', ['id' => $zona->id]) }}">{{$zona->nom}}</a></td>
     </tr>
     @endforeach
 </table>

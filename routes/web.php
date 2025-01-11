@@ -38,6 +38,8 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
+
+    Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
 });
 
 

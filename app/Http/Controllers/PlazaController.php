@@ -15,4 +15,10 @@ class PlazaController extends Controller
         $plaçes = Plaza::with('parking')->get();
         return view('plaza.llista')->with('plaçes', $plaçes);
     }
+
+    public function mostrarPlaçes($id) {
+        $planta = Zona::findOrFail($id);
+        $plaçes = Plaza::where('zona_id', $id)->get();
+        return view('plaza.planta')->with('planta', $planta)->with('plaçes', $plaçes);
+    }
 }
