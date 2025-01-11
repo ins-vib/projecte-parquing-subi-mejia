@@ -38,7 +38,6 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
-
     Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
 });
 
@@ -47,6 +46,9 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 //GESTIONS DES DE NORMAL
 Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
+    Route::get('/aparcar/plantes/{id}', [AparcarController::class,'aparcarParkingPlantes'])->name('aparcar.parkingplantas');
+    Route::get('/aparcar/plaçes/planta/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
+    Route::post('/aparcar/plaçes/planta/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
 });
 
 

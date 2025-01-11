@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <p class="px-6 py-3">SELECCIONA EL PARKING ON APARCAR?</p>
+    <p class="px-6 py-3">SELECCIONA EL PARKING ON APARCAR</p>
         
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-black">
@@ -23,7 +23,7 @@
                     <td class="px-6 py-4">{{$parking->name}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"> {{$parking->address}}, {{$parking->ciutat}}</td>
                     <td class="px-6 py-4">{{$parking->capacitat}}</td>
-                    <td><a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Aparcar</a></td> 
+                    <td><a href="/aparcar/plantes/{{$parking->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Aparcar</a></td> 
                 </tr>
                 @endforeach
             </tbody>
