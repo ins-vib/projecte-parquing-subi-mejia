@@ -12,7 +12,8 @@ class ZonaController extends Controller
     
     public function llista() {
         $plantes = Zona::with('parking')->get();
-        return view('zona.llista')->with('plantes', $plantes);
+        $plantes = Zona::Paginate(15);
+        return view('zona.llista',compact('plantes'))->with('plantes', $plantes);
     }
     
 }

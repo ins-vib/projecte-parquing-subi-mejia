@@ -54,6 +54,10 @@
     </table>
 </div>
 
+<div>
+ {{ $parkings->links() }}
+</div>
+
 
 <body>
     <div id="map" style="border-radius: 20px"></div>

@@ -29,5 +29,8 @@
         </tbody>
     </table>
 </div>
+<div>
+ {{ $plantes->links() }}
+</div>
 
 </x-app-layout>

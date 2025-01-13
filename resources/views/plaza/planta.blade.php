@@ -31,6 +31,9 @@
         
     </table>
 </div>
+<div>
+ {{ $plaçes->links() }}
+</div>
 
 
 </x-app-layout>
