@@ -47,6 +47,8 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 //GESTIONS DES DE NORMAL
 Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/cotxes', [CotxeController::class,'llista'])->name('cotxes.llista');
+    Route::get('/cotxes/afegir', [CotxeController::class,'cotxeAfegir'])->name('cotxes.cotxeAfegir');
+    Route::post('/cotxes/afegir', [CotxeController::class,'cotxeEnviar'])->name('cotxes.cotxeEnviar');
 
     Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
     Route::get('/aparcar/plantes/{id}', [AparcarController::class,'aparcarParkingPlantes'])->name('aparcar.parkingplantas');

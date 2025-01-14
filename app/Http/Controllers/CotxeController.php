@@ -15,4 +15,12 @@ class CotxeController extends Controller
     }
 
     //afegir i eliminar
+
+    public function cotxeAfegir() {
+        return view('cotxes.afegir');
+    }
+
+    public function ctoxesEnviar(Request $request) {
+        
+    }
 }
