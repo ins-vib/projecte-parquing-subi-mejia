@@ -51,7 +51,7 @@ Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::post('/aparcar/plaçes/planta/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
 
     Route::get('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
-    Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
+    Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1enviar'])->name('aparcar.aparcar1enviar');
 });
 
 

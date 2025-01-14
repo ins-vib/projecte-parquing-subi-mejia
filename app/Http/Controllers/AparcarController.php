@@ -42,6 +42,13 @@ class AparcarController extends Controller
 
     public function aparcar1($id) {
         $parking=Parking::find($id);
+
+        return view('aparcar.aparcar1')->with('parking', $parking);
+    }
+
+    public function aparcar1enviar($id) {
+        $parking=Parking::find($id);
+
         return view('aparcar.aparcar1')->with('parking', $parking);
     }
 }
