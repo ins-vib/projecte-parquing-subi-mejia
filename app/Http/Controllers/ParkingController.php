@@ -40,6 +40,7 @@ class ParkingController extends Controller
             'horaObertura' => 'required|date_format:H:i',
             'horaTancament' => 'required|date_format:H:i',
             'num_plantes' => 'required|integer|min:1',
+            'tipus_id' => 'required',
         ]);
 
         $parking = Parking::create($validatedData);

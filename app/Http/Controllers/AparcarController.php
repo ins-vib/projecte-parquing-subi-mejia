@@ -30,8 +30,18 @@ class AparcarController extends Controller
 
     public function enviaraparcarParkingPlazas($id) {
         $plaça = Plaza::findOrFail($id); 
+
+        $parking = Parking::findOrFail($plaça->zona->parking_id);
+        $parking->plaçes_ocupades = $parking->plaçes_ocupades + 1;
+
         $plaça->estat = 0; 
         $plaça->save();    
+        $parking->save();
         return redirect()->back();
+    }
+
+    public function aparcar1($id) {
+        $parking=Parking::find($id);
+        return view('aparcar.aparcar1')->with('parking', $parking);
     }
 }

@@ -17,11 +17,13 @@ return new class extends Migration
             $table->String('address');
             $table->String('ciutat');
             $table->integer('capacitat');
+            $table->integer('plaçes_ocupades')->default(0);
             $table->float('latitud');
             $table->float('longitud');
             $table->time('horaObertura');
             $table->time('horaTancament');
             $table->integer('num_plantes');
+            $table->foreignId('tipus_id')->constrained('tipusparking');
             $table->timestamps();
         });
     }
