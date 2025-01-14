@@ -46,9 +46,8 @@ class AparcarController extends Controller
         return view('aparcar.aparcar1')->with('parking', $parking);
     }
 
-    public function aparcar1enviar($id) {
+    public function aparcar1enviar($id, Request $request) {
         $parking=Parking::find($id);
-
         return view('aparcar.aparcar1')->with('parking', $parking);
     }
 }
