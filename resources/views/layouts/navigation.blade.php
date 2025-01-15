@@ -31,10 +31,6 @@
                     @endif
 
                     @if(Auth::user()->isNormal)
-                    <x-nav-link :href="route('cotxes.llista')" :active="request()->routeIs('cotxes.llista')">
-                        {{ __('Cotxes') }}
-                    </x-nav-link>
-                    
                     <x-nav-link :href="route('aparcar.aparcar')" :active="request()->routeIs('aparcar.aparcar')">
                         {{ __('Aparcar') }}
                     </x-nav-link>

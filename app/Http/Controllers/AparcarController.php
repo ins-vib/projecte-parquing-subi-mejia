@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Parking;
 use App\Models\Plaza;
 use App\Models\Zona;
+use App\Models\Cotxe;
 
 class AparcarController extends Controller
 {
@@ -49,5 +50,40 @@ class AparcarController extends Controller
     public function aparcar1enviar($id, Request $request) {
         $parking=Parking::find($id);
         return view('aparcar.aparcar1')->with('parking', $parking);
+    }
+
+
+
+
+    //APARCAR AMB COTXE
+
+    public function aparcarCotxes() {
+        $cotxes = Cotxe::all();
+        return view('aparcar.llistacotxes')->with('cotxes', $cotxes);
+    }
+
+
+    public function cotxeAfegir() {
+        return view('aparcar.afegircotxe');
+    }
+
+    public function cotxeEnviar(Request $request) {
+
+        $validatedData = $request->validate([
+            'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
+            'marca_cotxe' => 'required|string|max:25',
+            'model_cotxe' => 'required|string|max:25',
+        ]);
+        
+        $cotxe = Cotxe::Create($validatedData);
+        $cotxe->save();
+        return redirect('/aparcar/cotxes')->with('cotxes.llista');
+    }
+
+    public function eliminarCotxe($id) {
+        $cotxe = Cotxe::findOrFail($id);
+        $cotxe->delete();
+
+        return redirect()->route('aparcar.llistacotxes');
     }
 }
