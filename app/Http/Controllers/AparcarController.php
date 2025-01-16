@@ -24,9 +24,10 @@ class AparcarController extends Controller
     }
 
     public function aparcarParkingPlazas($id) {
+        $cotxe = Cotxe::findOrFail($id);
         $planta = Zona::findOrFail($id);
         $plaçes = Plaza::where('zona_id', $id)->get();
-        return view('aparcar.parkingplazas')->with('planta', $planta)->with('plaçes', $plaçes);
+        return view('aparcar.parkingplazas')->with('planta', $planta)->with('plaçes', $plaçes)->with('cotxe', $cotxe);
     }
 
     public function enviaraparcarParkingPlazas($id) {
@@ -57,9 +58,11 @@ class AparcarController extends Controller
 
     //APARCAR AMB COTXE
 
-    public function aparcarCotxes() {
+    public function aparcarCotxes($id) {
         $cotxes = Cotxe::all();
-        return view('aparcar.llistacotxes')->with('cotxes', $cotxes);
+        $parking = Parking::findOrFail($id);
+
+        return view('aparcar.llistacotxes')->with('cotxes', $cotxes)->with('parking', $parking);
     }
 
 

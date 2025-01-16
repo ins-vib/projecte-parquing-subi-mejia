@@ -20,7 +20,7 @@
                     <td class="px-6 py-4">{{$plaça->numero}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800" style="background-color: {{ $plaça->estat ? '' : 'red' }};">
                         @if ($plaça->estat)
-                            <form method="POST" action="/aparcar/plaçes/planta/{{$plaça->id}}">
+                            <form method="POST" action="/aparcar/cotxes/plaçes/planta/{{$plaça->id}}">
                                 @csrf
                                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
                                     Aparcar

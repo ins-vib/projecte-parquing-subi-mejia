@@ -5,6 +5,8 @@
         </h2>
     </x-slot>
 
+    <p class="px-6 py-3">ESCULL AMB EL COTXE QUE VOLS APARCAR</p>
+
     <div style="margin: 1%">
         <button><a href="/aparcar/cotxes/afegir" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir Cotxe</a></button>
     </div>
@@ -16,7 +18,7 @@
                     <th scope="col" class="px-6 py-3">Matricula</th>
                     <th scope="col" class="px-6 py-3">Marca del Cotxe</th>
                     <th scope="col" class="px-6 py-3">Model del cotxe</th>
-                    <th scope="col"  class="px-6 py-3"></th>
+                    <th scope="col" colspan="2" class="px-6 py-3"></th>
                 </tr>
             </thead>
             <tbody >
@@ -25,7 +27,8 @@
                     <td class="px-6 py-4">{{$cotxe->matricula}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$cotxe->marca_cotxe}}</td>
                     <td class="px-6 py-4">{{$cotxe->model_cotxe}}</td>
-                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800 font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="/cotxes/eliminar/{{$cotxe->id}}">Eliminar</a></td>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"><a href="/aparcar/cotxes/{{$parking->id}}/plantes/{{$cotxe->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Aparcar</a></td>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"><a  class="px-6 py-4 bg-gray-50 dark:bg-gray-800 font-medium text-red-600 dark:text-red-500 hover:underline ms-3" href="/cotxes/eliminar/{{$cotxe->id}}">Eliminar</a></td>
                 </tr>
                 @endforeach
             </tbody>
