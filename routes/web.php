@@ -52,16 +52,15 @@ Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::post('/aparcar/cotxes/afegir', [AparcarController::class, 'cotxeEnviar'])->name('aparcar.enviarcotxe');
     Route::get('/cotxes/eliminar/{id}', [AparcarController::class,'eliminarCotxe'])->name('aparcar.eliminarcotxe');  
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}', [AparcarController::class,'aparcarParkingPlantes'])->name('aparcar.parkingplantas');
-    Route::get('/aparcar/cotxes/{cotxe_id}/plaçes/planta/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
-    Route::post('/aparcar/cotxes/{cotxe_id}/plaçes/planta/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
+    Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
+    Route::post('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
     Route::get('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
     Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1enviar'])->name('aparcar.aparcar1enviar');
 });
-
-
 
 
 Route::get('/detecta-matricula', [PlateController::class, 'detectaMatricula']);
 
 
 require __DIR__.'/auth.php';
+
