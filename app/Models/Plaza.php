@@ -16,13 +16,16 @@ class Plaza extends Model
         'zona_id'
     ];
 
-    public function zona()
-    {
+    public function zona() {
         return $this->belongsTo(Zona::class);
     }
 
-    public function parking()
-{
-    return $this->belongsTo(Parking::class);
-}
+    public function parking() {
+        return $this->belongsTo(Parking::class);
+    }
+
+    public function cotxe() {
+        return $this->belongsTo(Cotxe::class);
+    }
+
 }

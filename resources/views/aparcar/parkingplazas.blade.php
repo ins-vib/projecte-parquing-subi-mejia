@@ -22,10 +22,12 @@
                         @if ($plaça->estat)
                             <form method="POST" action="/aparcar/{{$plaça->id}}">
                                 @csrf
+                                <input type="hidden" name="cotxe_id" value="{{ $cotxe->id }}">
                                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
                                     Aparcar
                                 </button>
                             </form>
+                            @elseif($plaça->cotxe) {{ $plaça->cotxe->matricula }}
                         @endif
                     </td>
                 @endforeach

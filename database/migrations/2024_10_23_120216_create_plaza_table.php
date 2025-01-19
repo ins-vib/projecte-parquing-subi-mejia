@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('tipus',['coche', 'moto','other']);
             $table->boolean('estat');
             $table->foreignId('zona_id')->constrained();
+            $table->foreignId('cotxe_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
