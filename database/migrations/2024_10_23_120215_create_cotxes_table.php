@@ -16,6 +16,7 @@ return new class extends Migration
             $table->String('matricula');
             $table->String('marca_cotxe');
             $table->String('model_cotxe');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

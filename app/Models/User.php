@@ -56,4 +56,8 @@ class User extends Authenticatable
         
         return $this->role === "normal";
     }
+
+    public function cotxes() {
+        return $this->hasMany(Cotxe::class);
+    }
 }

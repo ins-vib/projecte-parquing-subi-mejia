@@ -18,4 +18,8 @@ class Cotxe extends Model
     public function plazas() {
         return $this->hasMany(Plaza::class);
     }
+
+    public function users() {
+        return $this->belongsTo(User::class);
+    }
 }

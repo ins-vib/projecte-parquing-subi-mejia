@@ -73,7 +73,7 @@ class AparcarController extends Controller
     }
 
     public function aparcarCotxes($id) {
-        $cotxes = Cotxe::all();
+        $cotxes = Cotxe::all()->where('user_id', auth()->user()->id);
         $parking = Parking::findOrFail($id);
 
         return view('aparcar.llistacotxes')->with('cotxes', $cotxes)->with('parking', $parking);
