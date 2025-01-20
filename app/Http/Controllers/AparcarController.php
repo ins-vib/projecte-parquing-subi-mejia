@@ -30,17 +30,22 @@ class AparcarController extends Controller
 
     public function aparcar1enviar($id, Request $request) {
         $parking = Parking::find($id);
-    
-        if($request->has('aparcar')) {
-            $parking->plaçes_ocupades = $parking->plaçes_ocupades + 1;
+        if (!$parking) {
+            return redirect()->back()->with('error', 'Parking no trobat');
         }
-        
-        if($request->has('desaparcar')) {
-            $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
-        }
-        
+        $parking->capacitat = $parking->capacitat - 1;
         $parking->save();
-        return redirect()->back();
+        return redirect()->back()->with('parking', $parking);
+    }
+
+    public function desaparcar1enviar($id, Request $request) {
+        $parking = Parking::find($id);
+        if (!$parking) {
+            return redirect()->back()->with('error', 'Parking no trobat');
+        }
+        $parking->capacitat = $parking->capacitat + 1;
+        $parking->save();
+        return redirect()->back()->with('parking', $parking);
     }
 
 
@@ -102,6 +107,17 @@ class AparcarController extends Controller
 
         $plaça->estat = 0; 
         $plaça->cotxe_id = $request->cotxe_id;
+        $plaça->save();    
+        $parking->save();
+        return redirect()->back();
+    }
+
+    public function desaparcar($id) {
+        $plaça = Plaza::findOrFail($id); 
+        $parking = Parking::findOrFail($plaça->zona->parking_id);
+        $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
+
+        $plaça->estat = 1; 
         $plaça->save();    
         $parking->save();
         return redirect()->back();

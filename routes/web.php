@@ -47,15 +47,23 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 //GESTIONS DES DE NORMAL
 Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
+
     Route::get('/aparcar/cotxes/{id}', [AparcarController::class,'aparcarCotxes'])->name('aparcar.llistacotxes');
-    Route::get('/aparcar/cotxes/afegir', [AparcarController::class, 'cotxeAfegir'])->name('aparcar.afegircotxe');
-    Route::post('/aparcar/cotxes/afegir', [AparcarController::class, 'cotxeEnviar'])->name('aparcar.enviarcotxe');
+    Route::get('/aparcar/afegir', [AparcarController::class, 'cotxeAfegir'])->name('aparcar.afegircotxe');
+    Route::post('/aparcar/afegir', [AparcarController::class, 'cotxeEnviar'])->name('aparcar.enviarcotxe')->middleware('auth');
     Route::get('/cotxes/eliminar/{id}', [AparcarController::class,'eliminarCotxe'])->name('aparcar.eliminarcotxe');  
+
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}', [AparcarController::class,'aparcarParkingPlantes'])->name('aparcar.parkingplantas');
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
     Route::post('/aparcar/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
+    Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
+    Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
+    
+    Route::post('/desaparcar/{id}', [AparcarController::class,'desaparcar'])->name('aparcar.desaparcar');
+
     Route::get('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
     Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1enviar'])->name('aparcar.aparcar1enviar');
+    Route::post('/desaparcar/tipus1/{id}', [AparcarController::class,'desaparcar1enviar'])->name('aparcar.desaparcar1enviar');
 });
 
 

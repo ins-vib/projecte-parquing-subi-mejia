@@ -3,6 +3,18 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Afegir Cotxe
         </h2>
+        <h1>
+            <div id="clock" style="color: rgb(134, 125, 125); text-align: left;"></div>
+            <script>
+                function updateClock() {
+                    let options = { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                    let now = new Date().toLocaleTimeString('ca-ES', options);
+                    document.getElementById('clock').textContent = now;
+                }
+                setInterval(updateClock, 1000);
+                updateClock();
+            </script>
+        </h1>
     </x-slot>
 
 
@@ -12,7 +24,7 @@
                     <h1 style="text-align:center" class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Afegeix les deades del teu cotxe:
                     </h1>
-                    <form class="space-y-4 md:space-y-6" method="post" action="/aparcar/cotxes/afegir">
+                    <form class="space-y-4 md:space-y-6" method="post" action="/aparcar/afegir">
                         @csrf
                         <br>
 

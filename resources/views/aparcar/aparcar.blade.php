@@ -3,6 +3,19 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Aparcar
         </h2>
+        <h1>
+            <div id="clock" style="color: rgb(134, 125, 125); text-align: left;"></div>
+            <script>
+                function updateClock() {
+                    let options = { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                    let now = new Date().toLocaleTimeString('ca-ES', options);
+                    document.getElementById('clock').textContent = now;
+                }
+                setInterval(updateClock, 1000);
+                updateClock();
+            </script>
+        </h1>
+        
     </x-slot>
 
     <p class="px-6 py-3">APARCAMENT LLIURE</p>
@@ -19,7 +32,7 @@
             </thead>
             <tbody>
                 @foreach($parkings as $parking)
-                @if($parking->tipus_id == 1)
+                @if($parking->tipus_id != 2)
                 <tr>
                     <td class="px-6 py-4">{{$parking->name}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"> {{$parking->address}}, {{$parking->ciutat}}</td>
@@ -52,7 +65,7 @@
             </thead>
             <tbody>
                 @foreach($parkings as $parking)
-                @if($parking->tipus_id != 1)
+                @if($parking->tipus_id == 2)
                 <tr>
                     <td class="px-6 py-4">{{$parking->name}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"> {{$parking->address}}, {{$parking->ciutat}}</td>

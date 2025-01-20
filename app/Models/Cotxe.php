@@ -13,7 +13,8 @@ class Cotxe extends Model
     protected $fillable = [
         'matricula',
         'marca_cotxe',
-        'model_cotxe'
+        'model_cotxe',
+        'user_id'
     ];
     public function plazas() {
         return $this->hasMany(Plaza::class);
