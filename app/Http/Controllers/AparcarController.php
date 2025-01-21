@@ -33,7 +33,7 @@ class AparcarController extends Controller
         if (!$parking) {
             return redirect()->back()->with('error', 'Parking no trobat');
         }
-        $parking->capacitat = $parking->capacitat - 1;
+        $parking->plaçes_ocupades = $parking->plaçes_ocupades + 1;
         $parking->save();
         return redirect()->back()->with('parking', $parking);
     }
@@ -43,7 +43,7 @@ class AparcarController extends Controller
         if (!$parking) {
             return redirect()->back()->with('error', 'Parking no trobat');
         }
-        $parking->capacitat = $parking->capacitat + 1;
+        $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
         $parking->save();
         return redirect()->back()->with('parking', $parking);
     }
@@ -64,17 +64,19 @@ class AparcarController extends Controller
             'marca_cotxe' => 'required|string|max:25',
             'model_cotxe' => 'required|string|max:25',
         ]);
+        $validatedData['user_id'] = auth()->id();
         
         $cotxe = Cotxe::Create($validatedData);
         $cotxe->save();
-        return redirect('/aparcar/cotxes')->with('cotxes.llista');
+        return redirect()->route('aparcar.llistacotxes');
     }
 
     public function eliminarCotxe($id) {
         $cotxe = Cotxe::findOrFail($id);
+        Plaza::where('cotxe_id', $id)->update(['cotxe_id' => null, 'estat' => 1]);
         $cotxe->delete();
 
-        return redirect()->route('aparcar.llistacotxes');
+        return redirect()->back();
     }
 
     public function aparcarCotxes($id) {

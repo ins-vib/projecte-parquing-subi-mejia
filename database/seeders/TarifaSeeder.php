@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CotxesSeeder extends Seeder
+class TarifaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,9 @@ class CotxesSeeder extends Seeder
     {
         //
 
-        DB::table('cotxes')->insert([
-            'matricula' => '1234-ABC',
-            'marca_cotxe' => 'Toyota',
-            'model_cotxe' => 'Corolla',
-            'user_id' => 1,
+        DB::table('tarifa')->insert([
+            'tipusPagament' => 'targeta',
+            'preu' => 2.50,
         ]);
     }
 }

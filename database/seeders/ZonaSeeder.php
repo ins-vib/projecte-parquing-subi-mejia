@@ -16,31 +16,12 @@ class ZonaSeeder extends Seeder
     {
         //
 
-        $zonesPerParking = [
-            1 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 100, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 100, 'estat' => true],
-            ],
-            2 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 150, 'estat' => true],
-            ],
-            3 => [ 
-                ['nom' => 'Planta 1', 'capacitatTotal' => 150, 'estat' => true],
-                ['nom' => 'Planta 2', 'capacitatTotal' => 150, 'estat' => true],
-            ],
-        ];
+        DB::table('zonas')->insert([
+            'nom' => 'Zona A',
+            'capacitatTotal' => 50,
+            'estat' => true,
+            'parking_id' => 1,
+        ]);
 
-        foreach ($zonesPerParking as $parkingId => $zones) {
-            foreach ($zones as $zone) {
-                DB::table('zonas')->insert([
-                    'nom' => $zone['nom'],
-                    'capacitatTotal' => $zone['capacitatTotal'],
-                    'estat' => $zone['estat'],
-                    'parking_id' => $parkingId,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);  
-            }
-        }
     }
 }
