@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('tarifa', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipusPagament', ['efectiu', 'targeta']);
             $table->float('preu');
             $table->timestamps();
         });

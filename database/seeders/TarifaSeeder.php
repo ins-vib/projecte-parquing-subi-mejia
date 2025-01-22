@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class TarifaSeeder extends Seeder
 {
@@ -15,8 +17,13 @@ class TarifaSeeder extends Seeder
         //
 
         DB::table('tarifa')->insert([
-            'tipusPagament' => 'targeta',
+            'id' => '1',
             'preu' => 2.50,
+        ]);
+
+        DB::table('tarifa')->insert([
+            'id' => '2',
+            'preu' => 2.75,
         ]);
     }
 }
