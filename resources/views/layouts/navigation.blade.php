@@ -28,6 +28,10 @@
                     <x-nav-link :href="route('plaza.llista')" :active="request()->routeIs('plaza.llista')">
                         {{ __('Plaçes') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('cotxes.llista')" :active="request()->routeIs('cotxes.llista')">
+                        {{ __('Cotxes') }}
+                    </x-nav-link>
                     @endif
 
                     @if(Auth::user()->isNormal)
