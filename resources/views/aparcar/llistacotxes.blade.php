@@ -20,7 +20,15 @@
     <p class="px-6 py-3">ESCULL AMB EL COTXE QUE VOLS APARCAR</p>
 
     <div style="margin: 1%">
-        <button><a href="/aparcar/afegir" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir Cotxe</a></button>
+        <button><a href="/aparcar/afegir/{{$parking->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir Cotxe</a></button>
+    </div>
+
+    <div class="p-4 w-full">
+        <form action="{{ route('aparcar.llistacotxes', $parking->id) }}" method="GET">
+            <input style="border-radius: 10px" class="w-full" type="text" name="buscar" placeholder="Busca per matrícula, marca o cotxe" 
+                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                   value="{{ request('buscar') }}">
+        </form>
     </div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">

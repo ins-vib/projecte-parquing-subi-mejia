@@ -12,7 +12,6 @@ class ParkingController extends Controller
     //
 
     public function llista() {
-        
         $parkings= Parking::all();
         $parkings = Parking::Paginate(10);
         return view("parkings.llista")->with('parkings',$parkings);

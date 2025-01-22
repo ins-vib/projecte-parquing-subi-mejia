@@ -7,7 +7,7 @@ use App\Http\Controllers\PlazaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlateController;
 use App\Http\Controllers\AparcarController;
-use App\Http\Controllers\CotxeController;
+use App\Http\Controllers\CotxesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,6 +40,8 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
     Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
+
+    Route::get('/cotxes', [CotxesController::class,'llista'])->name('cotxes.llista');
 });
 
 
@@ -47,9 +49,11 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 //GESTIONS DES DE NORMAL
 Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
+    Route::get('/aparcar/cotxes', [AparcarController::class,'llistaCotxes'])->name('aparcar.llistacotxes2');
+
 
     Route::get('/aparcar/cotxes/{id}', [AparcarController::class,'aparcarCotxes'])->name('aparcar.llistacotxes');
-    Route::get('/aparcar/afegir', [AparcarController::class, 'cotxeAfegir'])->name('aparcar.afegircotxe');
+    Route::get('/aparcar/afegir/{parking_id}', [AparcarController::class, 'cotxeAfegir'])->name('aparcar.afegircotxe');
     Route::post('/aparcar/afegir', [AparcarController::class, 'cotxeEnviar'])->name('aparcar.enviarcotxe')->middleware('auth');
     Route::get('/cotxes/eliminar/{id}', [AparcarController::class,'eliminarCotxe'])->name('aparcar.eliminarcotxe');  
 

@@ -20,7 +20,7 @@ class Cotxe extends Model
         return $this->hasMany(Plaza::class);
     }
 
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }

@@ -53,8 +53,8 @@ class AparcarController extends Controller
 
     //APARCAR AMB COTX
 
-    public function cotxeAfegir() {
-        return view('aparcar.afegircotxe');
+    public function cotxeAfegir($parking_id) {
+        return view('aparcar.afegircotxe', ['parking_id' => $parking_id]);
     }
 
     public function cotxeEnviar(Request $request) {
@@ -68,7 +68,7 @@ class AparcarController extends Controller
         
         $cotxe = Cotxe::Create($validatedData);
         $cotxe->save();
-        return redirect()->route('aparcar.llistacotxes');
+        return redirect()->route('aparcar.llistacotxes', ['id' => $request->parking_id]);
     }
 
     public function eliminarCotxe($id) {
@@ -79,11 +79,21 @@ class AparcarController extends Controller
         return redirect()->back();
     }
 
-    public function aparcarCotxes($id) {
-        $cotxes = Cotxe::all()->where('user_id', auth()->user()->id);
+    public function aparcarCotxes($id, Request $request) {
+        $buscar = request('buscar');        
         $parking = Parking::findOrFail($id);
 
-        return view('aparcar.llistacotxes')->with('cotxes', $cotxes)->with('parking', $parking);
+        $cotxes = Cotxe::where('user_id', auth()->user()->id)
+        ->when($buscar, function($query) use ($buscar) {
+            return $query->where(function($q) use ($buscar) {
+                $q->where('matricula', 'like', "%{$buscar}%")
+                  ->orWhere('marca_cotxe', 'like', "%{$buscar}%")
+                  ->orWhere('model_cotxe', 'like', "%{$buscar}%");
+            });
+        })
+        ->get();
+
+        return view('aparcar.llistacotxes')->with('cotxes', $cotxes)->with('parking', $parking)->with('buscar', $buscar);
     }
 
 
