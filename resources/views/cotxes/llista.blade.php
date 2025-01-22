@@ -21,6 +21,7 @@
                 <th scope="col" class="px-6 py-3">Marca</th>
                 <th scope="col" class="px-6 py-3">Model</th>
                 <th scope="col" class="px-6 py-3">Usuari</th>
+                <th scope="col" class="px-6 py-3">Eliminar</th>
             </tr>
         </thead>
         <tbody >
@@ -30,6 +31,7 @@
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$cotxe->marca_cotxe}}</td>
                     <td class="px-6 py-4">{{$cotxe->model_cotxe}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$cotxe->user->name}}</td>
+                    <td class="px-6 py-4 font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="/cotxes/eliminar/admin/{{$cotxe->id}}">Eliminar</a></td>
                 </tr>
             @endforeach
         </tbody>

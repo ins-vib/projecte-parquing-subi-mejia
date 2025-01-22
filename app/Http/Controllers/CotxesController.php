@@ -22,4 +22,10 @@ class CotxesController extends Controller
         ->paginate(15);
         return view('cotxes.llista')->with('cotxes', $cotxes)->with('buscar', $buscar);
     }
+
+    public function eliminar($id){
+        $cotxes = Cotxe::findOrFail($id);
+        $cotxes->delete();
+        return redirect()->route('cotxes.llista');
+    }
 }

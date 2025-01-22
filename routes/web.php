@@ -42,6 +42,7 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
 
     Route::get('/cotxes', [CotxesController::class,'llista'])->name('cotxes.llista');
+    Route::get('/cotxes/eliminar/admin/{id}', [CotxesController::class,'eliminar'])->name('cotxes.eliminar');
 });
 
 
