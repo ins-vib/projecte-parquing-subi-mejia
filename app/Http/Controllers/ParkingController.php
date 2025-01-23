@@ -12,8 +12,7 @@ class ParkingController extends Controller
     //
 
     public function llista() {
-        $parkings= Parking::all();
-        $parkings = Parking::Paginate(10);
+        $parkings = Parking::with('tarifa')->paginate(10);
         return view("parkings.llista")->with('parkings',$parkings);
     }
 
@@ -40,6 +39,7 @@ class ParkingController extends Controller
             'horaTancament' => 'required|date_format:H:i',
             'num_plantes' => 'required|integer|min:1',
             'tipus_id' => 'required',
+            'tarifa_id' => 'required',
         ]);
 
         $parking = Parking::create($validatedData);

@@ -42,6 +42,8 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
 
     Route::get('/cotxes', [CotxesController::class,'llista'])->name('cotxes.llista');
+    Route::get('/cotxes/afegir/admin', [CotxesController::class,'cotxeAfegirAdmin'])->name('cotxes.afegircotxeadmin');
+    Route::post('/cotxes/afegir/admin', [CotxesController::class,'cotxeAfegirAdminEnviar'])->name('cotxes.afegircotxeadmin');
     Route::get('/cotxes/eliminar/admin/{id}', [CotxesController::class,'eliminar'])->name('cotxes.eliminar');
 });
 

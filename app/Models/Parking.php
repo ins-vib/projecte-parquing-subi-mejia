@@ -17,6 +17,10 @@ class Parking extends Model
         return $this->belongsTo(Tipus::class);
     }
 
+    public function tarifa() {
+        return $this->belongsTo(Tarifa::class);
+    }
+
     protected $fillable = [
         'name',
         'address',
@@ -29,5 +33,6 @@ class Parking extends Model
         'horaTancament',
         'num_plantes',
         'tipus_id',
+        'tarifa_id',
     ];
 }

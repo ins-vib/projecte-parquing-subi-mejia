@@ -18,7 +18,7 @@ class TarifaSeeder extends Seeder
 
         DB::table('tarifa')->insert([
             'id' => '1',
-            'preu' => 2.50,
+            'preu' => 1.8,
         ]);
 
         DB::table('tarifa')->insert([

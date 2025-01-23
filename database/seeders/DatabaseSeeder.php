@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(TipusSeeder::class);
+        $this->call(TarifaSeeder::class);
         $this->call(ParkingSeeder::class);
         $this->call(ZonaSeeder::class);
 

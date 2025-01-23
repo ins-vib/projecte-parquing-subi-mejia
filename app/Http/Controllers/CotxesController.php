@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cotxe;
+use App\Models\User;
+
 
 class CotxesController extends Controller
 {
@@ -23,8 +25,25 @@ class CotxesController extends Controller
         return view('cotxes.llista')->with('cotxes', $cotxes)->with('buscar', $buscar);
     }
 
+    public function cotxeAfegirAdmin(Request $request) {
+        $users = User::all();
+        return view('cotxes.afegircotxeadmin')->with('users', $users);
+    }
+
+    public function cotxeAfegirAdminEnviar(Request $request) {
+        $validatedData = $request->validate([
+            'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
+            'marca_cotxe' => 'required|string|max:25',
+            'model_cotxe' => 'required|string|max:25',
+            'user_id' => 'required|exists:users,id',
+        ]);        
+        $cotxe = Cotxe::Create($validatedData);
+        return redirect()->route('cotxes.llista');
+    }
+
     public function eliminar($id){
         $cotxes = Cotxe::findOrFail($id);
+        $cotxes->plazas()->update(['cotxe_id' => null]);
         $cotxes->delete();
         return redirect()->route('cotxes.llista');
     }

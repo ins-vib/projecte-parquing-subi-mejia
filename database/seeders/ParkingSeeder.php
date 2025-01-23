@@ -28,6 +28,7 @@ class ParkingSeeder extends Seeder
             'horaTancament' => '22:00:00',
             'num_plantes' => 3,
             'tipus_id' => 1,
+            'tarifa_id' => 1,
             ]
         ]);
     }
