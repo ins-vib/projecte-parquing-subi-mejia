@@ -53,6 +53,29 @@ class AparcarController extends Controller
 
     //APARCAR AMB COTX
 
+    public function cotxeLlistaBase(){
+        $cotxes = Cotxe::all();
+        return view('aparcar.llistacotxesbase')->with('cotxes', $cotxes);
+    }
+
+    public function cotxeAfegirBase() {
+        return view('aparcar.afegircotxebase');
+    }
+
+    public function cotxeAfegirBaseEnviar(Request $request) {
+
+        $validatedData = $request->validate([
+            'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
+            'marca_cotxe' => 'required|string|max:25',
+            'model_cotxe' => 'required|string|max:25',
+        ]);
+        $validatedData['user_id'] = auth()->id();
+        
+        $cotxe = Cotxe::Create($validatedData);
+        $cotxe->save();
+        return redirect()->route('aparcar.llistacotxesbase');
+    }
+
     public function cotxeAfegir($parking_id) {
         return view('aparcar.afegircotxe', ['parking_id' => $parking_id]);
     }

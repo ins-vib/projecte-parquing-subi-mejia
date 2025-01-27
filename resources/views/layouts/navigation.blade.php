@@ -38,6 +38,10 @@
                     <x-nav-link :href="route('aparcar.aparcar')" :active="request()->routeIs('aparcar.aparcar')">
                         {{ __('Aparcar') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('aparcar.llistacotxesbase')" :active="request()->routeIs('aparcar.llistacotxesbase')">
+                        {{ __('Els Teus Cotxes') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

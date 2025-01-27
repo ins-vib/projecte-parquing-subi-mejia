@@ -53,7 +53,9 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar', [AparcarController::class,'aparcar'])->name('aparcar.aparcar');
     Route::get('/aparcar/cotxes', [AparcarController::class,'llistaCotxes'])->name('aparcar.llistacotxes2');
-
+    Route::get('/aparcar/elsteuscotxes', [AparcarController::class,'cotxeLlistaBase'])->name('aparcar.llistacotxesbase');
+    Route::get('/aparcar/elsteuscotxes/afegir', [AparcarController::class,'cotxeAfegirBase'])->name('aparcar.afegircotxebase');
+    Route::post('/aparcar/elsteuscotxes/afegir', [AparcarController::class,'cotxeAfegirBaseEnviar'])->name('aparcar.afegircotxebaseenviar');
 
     Route::get('/aparcar/cotxes/{id}', [AparcarController::class,'aparcarCotxes'])->name('aparcar.llistacotxes');
     Route::get('/aparcar/afegir/{parking_id}', [AparcarController::class, 'cotxeAfegir'])->name('aparcar.afegircotxe');
