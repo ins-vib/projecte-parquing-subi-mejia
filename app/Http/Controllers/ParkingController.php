@@ -145,4 +145,16 @@ class ParkingController extends Controller
 
         return redirect()->route('parkings.llista');
     }
+
+
+
+
+
+
+    //GESTIONS DE OPERADOR
+    public function llistaOperador() {
+        $parking = Parking::find(auth()->user()->parking_id);
+        return view('operador.llistaparkings')->with('parking', $parking);
+    }
+
 }

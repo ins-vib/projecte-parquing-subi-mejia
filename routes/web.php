@@ -48,6 +48,12 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 });
 
 
+//GESTIONS D'OPERADOR
+Route::group(['middleware'=>['auth','role:operador']], function() {
+    Route::get('/parkings/operador', [ParkingController::class,'llistaOperador'])->name('operador.llistaparkings');
+});
+
+
 
 //GESTIONS DES DE NORMAL
 Route::group(['middleware'=>['auth','role:normal']], function() {

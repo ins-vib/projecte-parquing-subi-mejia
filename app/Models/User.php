@@ -51,10 +51,16 @@ class User extends Authenticatable
         return $this->role === "admin";
     }
 
-   public function getIsNormalAttribute()
+    public function getIsNormalAttribute()
     {
         
         return $this->role === "normal";
+    }
+
+    public function getIsOperadorAttribute()
+    {
+        
+        return $this->role === "operador";
     }
 
     public function cotxes() {

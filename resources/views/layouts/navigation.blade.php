@@ -41,6 +41,9 @@
                     @endif
 
                     @if(Auth::user()->isOperador)
+                    <x-nav-link :href="route('operador.llistaparkings')" :active="request()->routeIs('operador.llistaparkings')">
+                        {{ __('Parkings') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

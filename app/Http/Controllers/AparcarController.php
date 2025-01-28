@@ -53,8 +53,17 @@ class AparcarController extends Controller
 
     //APARCAR AMB COTX
 
-    public function cotxeLlistaBase(){
-        $cotxes = Cotxe::all();
+    public function cotxeLlistaBase(Request $request) {
+        $buscar = request('buscar');        
+        $cotxes = Cotxe::where('user_id', auth()->user()->id)
+        ->when($buscar, function($query) use ($buscar) {
+            return $query->where(function($q) use ($buscar) {
+                $q->where('matricula', 'like', "%{$buscar}%")
+                  ->orWhere('marca_cotxe', 'like', "%{$buscar}%")
+                  ->orWhere('model_cotxe', 'like', "%{$buscar}%");
+            });
+        })
+        ->get();
         return view('aparcar.llistacotxesbase')->with('cotxes', $cotxes);
     }
 
