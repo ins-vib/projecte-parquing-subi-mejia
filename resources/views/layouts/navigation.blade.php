@@ -12,10 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
                     @if(Auth::user()->isAdmin)
                     <x-nav-link :href="route('parkings.llista')" :active="request()->routeIs('parkings.llista')">
                         {{ __('Parkings') }}
@@ -42,6 +38,9 @@
                     <x-nav-link :href="route('aparcar.llistacotxesbase')" :active="request()->routeIs('aparcar.llistacotxesbase')">
                         {{ __('Els Teus Cotxes') }}
                     </x-nav-link>
+                    @endif
+
+                    @if(Auth::user()->isOperador)
                     @endif
                 </div>
             </div>
