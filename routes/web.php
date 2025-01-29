@@ -51,6 +51,18 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 //GESTIONS D'OPERADOR
 Route::group(['middleware'=>['auth','role:operador']], function() {
     Route::get('/parkings/operador', [ParkingController::class,'llistaOperador'])->name('operador.llistaparkings');
+    Route::get('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
+    Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1enviar'])->name('aparcar.aparcar1enviar');
+    Route::post('/desaparcar/tipus1/{id}', [AparcarController::class,'desaparcar1enviar'])->name('aparcar.desaparcar1enviar');
+
+    Route::get('/aparcar/operador/cotxes/{parking_id}/plantes/{cotxe_id}', [ParkingController::class,'aparcarParkingPlantesOperador'])->name('operador.plantes');
+    Route::get('/aparcar/operador/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [ParkingController::class,'aparcarParkingPlazasOperador'])->name('operador.plaçes');
+    Route::post('/aparcar/operador/{id}', [ParkingController::class,'enviaraparcarParkingPlazasOperador'])->name('aparcar.enviarparkingplazas');
+    Route::get('/aparcar/operador/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [ParkingController::class,'aparcarParkingPlazasOperador'])->name('aparcar.parkingplazas');
+    Route::post('/desaparcar/operador/{id}', [ParkingController::class,'desaparcarOperador'])->name('aparcar.desaparcar');
+
+    Route::get('/aparcar/cotxes/operador/{id}', [ParkingController::class,'aparcarCotxesOperador'])->name('operador.llistacotxes');
+
 });
 
 
@@ -72,13 +84,7 @@ Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
     Route::post('/aparcar/{id}', [AparcarController::class,'enviaraparcarParkingPlazas'])->name('aparcar.enviarparkingplazas');
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
-    Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
-    
     Route::post('/desaparcar/{id}', [AparcarController::class,'desaparcar'])->name('aparcar.desaparcar');
-
-    Route::get('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1'])->name('aparcar.aparcar1');
-    Route::post('/aparcar/tipus1/{id}', [AparcarController::class,'aparcar1enviar'])->name('aparcar.aparcar1enviar');
-    Route::post('/desaparcar/tipus1/{id}', [AparcarController::class,'desaparcar1enviar'])->name('aparcar.desaparcar1enviar');
 });
 
 
