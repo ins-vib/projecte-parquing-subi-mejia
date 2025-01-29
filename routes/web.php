@@ -35,7 +35,7 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
     
     Route::get('/plantes', [ZonaController::class,'llista'])->name('zona.llista');
-    Route::get('/plantes/llista/{{id}}', [ZonaController::class,'informacio'])->name('zona.informacio');
+    Route::get('/plantes/llista/{id}', [ZonaController::class,'informacio'])->name('zona.informacio');
 
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');

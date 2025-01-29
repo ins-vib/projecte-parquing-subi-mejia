@@ -19,8 +19,7 @@ class PlazaController extends Controller
 
     public function mostrarPlaçes($id) {
         $planta = Zona::findOrFail($id);
-        $plaçes = Plaza::where('zona_id', $id)->get();
-        $plaçes = Plaza::Paginate(15);
+        $plaçes = Plaza::where('zona_id', $id)->paginate(15);
         return view('plaza.planta')->with('planta', $planta)->with('plaçes', $plaçes);
     }
 }

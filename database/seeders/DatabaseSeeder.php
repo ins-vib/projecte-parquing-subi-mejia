@@ -28,10 +28,18 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::factory()->create([
+            'name' => 'Operador',
+            'email' => 'operador@operador.com',
+            'password' => '123456789',
+            'role' => 'operador',
+        ]);
+
         $this->call(TipusSeeder::class);
         $this->call(TarifaSeeder::class);
         $this->call(ParkingSeeder::class);
         $this->call(ZonaSeeder::class);
+        $this->call(PlazaSeeder::class);
 
 
     }
