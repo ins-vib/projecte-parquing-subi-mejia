@@ -18,6 +18,8 @@ return new class extends Migration
             $table->boolean('estat');
             $table->foreignId('zona_id')->constrained();
             $table->foreignId('cotxe_id')->nullable()->constrained();
+            $table->integer('entrada_timestamp')->nullable();
+            $table->integer('sortida_timestamp')->nullable();
             $table->timestamps();
         });
     }

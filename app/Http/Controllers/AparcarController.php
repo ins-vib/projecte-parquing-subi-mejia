@@ -151,6 +151,7 @@ class AparcarController extends Controller
 
         $plaça->estat = 0; 
         $plaça->cotxe_id = $request->cotxe_id;
+        $plaça->entrada_timestamp = time();
         $plaça->save();    
         $parking->save();
         return redirect()->back();
@@ -162,9 +163,10 @@ class AparcarController extends Controller
         $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
 
         $plaça->estat = 1; 
+        $plaça->sortida_timestamp = time();
         $plaça->save();    
         $parking->save();
-        return redirect()->back();
+        return redirect()->route('tickets.ticket', $id);
     }
 
 }

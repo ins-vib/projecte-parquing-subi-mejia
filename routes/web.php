@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlateController;
 use App\Http\Controllers\AparcarController;
 use App\Http\Controllers\CotxesController;
+use App\Http\Controllers\TicketController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,7 +63,6 @@ Route::group(['middleware'=>['auth','role:operador']], function() {
     Route::post('/desaparcar/operador/{id}', [ParkingController::class,'desaparcarOperador'])->name('aparcar.desaparcar');
 
     Route::get('/aparcar/cotxes/operador/{id}', [ParkingController::class,'aparcarCotxesOperador'])->name('operador.llistacotxes');
-
 });
 
 
@@ -86,6 +86,7 @@ Route::group(['middleware'=>['auth','role:normal']], function() {
     Route::get('/aparcar/cotxes/{parking_id}/plantes/{cotxe_id}/{id}', [AparcarController::class,'aparcarParkingPlazas'])->name('aparcar.parkingplazas');
     Route::post('/desaparcar/{id}', [AparcarController::class,'desaparcar'])->name('aparcar.desaparcar');
 });
+Route::get('/tickets/{plaça}', [TicketController::class, 'generarTicket'])->name('tickets.ticket');
 
 
 Route::get('/detecta-matricula', [PlateController::class, 'detectaMatricula']);
