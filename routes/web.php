@@ -9,6 +9,8 @@ use App\Http\Controllers\PlateController;
 use App\Http\Controllers\AparcarController;
 use App\Http\Controllers\CotxesController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ExamenController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -90,6 +92,10 @@ Route::get('/tickets/{plaça}', [TicketController::class, 'generarTicket'])->nam
 
 
 Route::get('/detecta-matricula', [PlateController::class, 'detectaMatricula']);
+
+// Ruta per l'examen
+Route::get('/examen', [ExamenController::class, 'llistat'])->name('examen.llistat');
+
 
 
 require __DIR__.'/auth.php';
