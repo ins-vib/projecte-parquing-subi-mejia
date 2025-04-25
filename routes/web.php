@@ -46,6 +46,9 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/cotxes/afegir/admin', [CotxesController::class,'cotxeAfegirAdmin'])->name('cotxes.afegircotxeadmin');
     Route::post('/cotxes/afegir/admin', [CotxesController::class,'cotxeAfegirAdminEnviar'])->name('cotxes.afegircotxeadmin');
     Route::get('/cotxes/eliminar/admin/{id}', [CotxesController::class,'eliminar'])->name('cotxes.eliminar');
+
+    Route::get('/parkings/{id}/imatges', [ParkingController::class, 'mostrarImatges'])->name('parkings.imatges');
+    Route::post('/parkings/pujar-imatges', [ParkingController::class, 'pujarImatges'])->name('parkings.pujarImatges');
 });
 
 

@@ -54,4 +54,6 @@ Zona del parking:
     @endforeach
 </table>
 
+<button><a href="{{ route('parkings.imatges', ['id' => $parkings->id]) }}">Imatges del Parking</a></button>
+
 </x-app-layout>

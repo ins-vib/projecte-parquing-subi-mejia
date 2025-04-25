@@ -7,6 +7,7 @@ use App\Models\Parking;
 use App\Models\Zona;
 use App\Models\Plaza;
 use App\Models\Cotxe;
+use App\Models\Imatge;
 
 class ParkingController extends Controller
 {
@@ -214,5 +215,32 @@ class ParkingController extends Controller
         $parking->save();
         return redirect()->route('tickets.ticket', $id);
     }
+
+
+    //Imatges
+    public function mostrarImatges($id) {
+        $parking = Parking::findOrFail($id);
+        $imatges = Imatge::where('parking_id', $id)->get();
+        return view('parkings.mostrarImatges', compact('parking', 'imatges'));
+    }    
+
+    public function pujarImatges(Request $request) {
+        $request->validate([
+            'parking_id' => 'required|exists:parkings,id',
+            'imatge' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $path = $request->file('imatge')->store('imatges', 'public');
+    
+        $imatge = new Imatge();
+        $imatge->parking_id = $request->parking_id;
+        $imatge->path = $path;
+        $imatge->save();
+    
+        return redirect()->back()->with('success', 'Imatge pujada correctament!');
+    }
+
+
+    //FALTA QUE S'ENVII A LA BASE DE DADES I CARREGUI LES FOTOS DES D'ALLA, LES VIEWS I CONTROLLER FUNCIONA, SHA DE CANVIAR
 
 }
