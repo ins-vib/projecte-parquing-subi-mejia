@@ -54,6 +54,15 @@ Zona del parking:
     @endforeach
 </table>
 
-<button><a href="{{ route('parkings.imatges', ['id' => $parkings->id]) }}">Imatges del Parking</a></button>
+<h2 class="mt-10 text-xl font-semibold">Imatges del Parking</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    @foreach($parkings->imatges as $imatge)
+        <div class="border rounded overflow-hidden shadow">
+            <img src="{{ asset('storage/' . $imatge->path) }}" alt="Imatge Parking" class="h-full w-auto object-cover">
+        </div>
+    @endforeach
+</div>
+
+<button><a href="{{ route('parkings.imatges', ['id' => $parkings->id]) }}">Pujar imatges</a></button>
 
 </x-app-layout>

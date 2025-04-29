@@ -21,6 +21,11 @@ class Parking extends Model
         return $this->belongsTo(Tarifa::class);
     }
 
+    public function imatges()
+{
+    return $this->hasMany(Imatge::class);
+}
+
     protected $fillable = [
         'name',
         'address',

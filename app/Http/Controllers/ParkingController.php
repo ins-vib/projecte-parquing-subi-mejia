@@ -239,8 +239,4 @@ class ParkingController extends Controller
     
         return redirect()->back()->with('success', 'Imatge pujada correctament!');
     }
-
-
-    //FALTA QUE S'ENVII A LA BASE DE DADES I CARREGUI LES FOTOS DES D'ALLA, LES VIEWS I CONTROLLER FUNCIONA, SHA DE CANVIAR
-
 }
