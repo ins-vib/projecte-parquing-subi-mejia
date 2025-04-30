@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Tipusplaçes;
 
 class PlazaSeeder extends Seeder
 {
@@ -20,13 +21,23 @@ class PlazaSeeder extends Seeder
             ['id' => 3, 'nom' => 'Planta 1', 'capacitat' => 80, 'parking_id' => 2],
         ];
 
+        $tipusPlaçes = Tipusplaçes::all()->keyBy('nom');
+
         foreach ($zones as $zone) {
             for ($i = 1; $i <= $zone['capacitat']; $i++) {
-                $tipus = ($i % 10 < 6) ? 'coche' : (($i % 10 < 9) ? 'moto' : 'other');
+                if ($i % 10 < 6) {
+                    $tipus = 'coche';
+                } elseif ($i % 10 < 9) {
+                    $tipus = 'moto';
+                } else {
+                    $tipus = 'other';
+                }
+
+                $tipusId = $tipusPlaçes->get($tipus)->id;
 
                 $plazas[] = [
                     'numero' => $i,
-                    'tipus' => $tipus,
+                    'tipus_id' => $tipusId,
                     'estat' => true,
                     'zona_id' => $zone['id'],
                 ];

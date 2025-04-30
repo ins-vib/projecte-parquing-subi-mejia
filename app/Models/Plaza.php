@@ -11,7 +11,7 @@ class Plaza extends Model
 
     protected $fillable = [
         'numero',
-        'tipus', 
+        'tipus_id', 
         'estat', 
         'zona_id'
     ];
@@ -26,6 +26,11 @@ class Plaza extends Model
 
     public function cotxe() {
         return $this->belongsTo(Cotxe::class);
+    }
+
+    public function tipusplaça()
+    {
+        return $this->belongsTo(Tipusplaçes::class, 'tipus_id');
     }
 
 }

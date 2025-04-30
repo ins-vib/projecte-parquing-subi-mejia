@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plazas', function (Blueprint $table) {
             $table->id();
             $table->string('numero');
-            $table->enum('tipus',['coche', 'moto','other']);
+            $table->foreignId('tipus_id')->constrained('tipusplaçes')->onDelete('cascade');;
             $table->boolean('estat');
             $table->foreignId('zona_id')->constrained();
             $table->foreignId('cotxe_id')->nullable()->constrained()->onDelete('set null');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plaza');
+        Schema::dropIfExists('plazas');
     }
 };

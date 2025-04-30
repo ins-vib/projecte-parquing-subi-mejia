@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Parking;
 use App\Models\Zona;
 use App\Models\Plaza;
+use App\Models\Tipusplaçes;
 
 class PlazaController extends Controller
 {

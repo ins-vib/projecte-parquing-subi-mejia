@@ -23,7 +23,7 @@
             <tr >
                 <td class="px-6 py-4">{{$plaça->numero}}</td>
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$plaça->zona_id}}</td>
-                <td class="px-6 py-4">{{$plaça->tipus}}</td>
+                <td class="px-6 py-4">{{$plaça->tipusplaça->nom}}</td>
                 <td class="px-6 py-4" style="border: solid black 1px; background-color: {{ $plaça->estat ? 'green' : 'red' }};"></td>
             @endforeach
             

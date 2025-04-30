@@ -8,6 +8,9 @@ use App\Models\Zona;
 use App\Models\Plaza;
 use App\Models\Cotxe;
 use App\Models\Imatge;
+use App\Models\Tipusplaçes;
+
+use Illuminate\Support\Facades\DB;
 
 class ParkingController extends Controller
 {
@@ -25,7 +28,8 @@ class ParkingController extends Controller
     }
 
     public function formAfegir() {
-        return view("parkings.afegir");
+        $tipusPlaçes = Tipusplaçes::all(); 
+        return view("parkings.afegir")->with('tipusPlaçes', $tipusPlaçes);
     }
 
     public function afegir(Request $request) {
@@ -40,33 +44,41 @@ class ParkingController extends Controller
             'horaObertura' => 'required|date_format:H:i',
             'horaTancament' => 'required|date_format:H:i',
             'num_plantes' => 'required|integer|min:1',
-            'tipus_id' => 'required',
             'tarifa_id' => 'required',
+            'tipus_id' => 'required|exists:tipusparking,id', 
+            'num_places' => 'required|array', 
         ]);
+
+        $sumaPlaces = array_sum($validatedData['num_places']);
+        if ($sumaPlaces != $validatedData['capacitat']) {
+            return back()->withErrors(['num_places' => 'La suma de les places ha de ser igual a la capacitat total.'])->withInput();
+        }
 
         $parking = Parking::create($validatedData);
 
         $numPlantes = $validatedData['num_plantes'];
         $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
 
+        $numeroPlaça = 1;
         for ($i = 1; $i <= $numPlantes; $i++) {
-            $zonas = Zona::create([
+            $zona = Zona::create([
                 'parking_id' => $parking->id,
-                'nom' => 'Planta ' . $parking->name . ' '. $i,
-                'capacitatTotal' => $capacitatPerPlanta, 
-                'estat' => true, 
-            ]);
+                'nom' => 'Planta ' . $parking->name . ' ' . $i,
+                'capacitatTotal' => $capacitatPerPlanta,
+                'estat' => true,
+            ]);    
 
-            for ($j = 1; $j <= $capacitatPerPlanta; $j++) {
-                Plaza::create([
-                    'numero' => 'Numero ' . $j,
-                    'tipus' => 'coche', 
-                    'estat' => true, 
-                    'zona_id' => $zonas->id,
-                ]);
-            }
+            foreach ($validatedData['num_places'] as $tipus_id => $quantitat) {
+                for ($j = 0; $j < $quantitat / $numPlantes; $j++) {
+                    Plaza::create([
+                        'numero' => 'Numero ' . $numeroPlaça++,
+                        'tipus_id' => $tipus_id,
+                        'estat' => true,
+                        'zona_id' => $zona->id,
+                    ]);
+                }
+            }    
         }
-        
         return redirect('/parkings')->with('parkings.llista');
     }
 
