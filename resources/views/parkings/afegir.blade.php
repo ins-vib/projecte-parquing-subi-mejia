@@ -21,16 +21,16 @@
                 <input type="text" name="ciutat" id="ciutat" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value="{{ old('ciutat') }}">
                 <label for="ciutat" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Ciutat</label>
             </div>
-            <div class="relative z-0 w-full mb-5 group">
+            <div class="relative z-0 w-full mb-2.5 group">
                 <input type="number" name="capacitat" id="capacitat" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value="{{ old('capacitat') }}">
                 <label for="capacitat" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Capacitat</label>
             </div>
 
-            <div id="tipusPlaçes">
+            <div id="tipusPlaçes" style="margin-left: 20px;">
                 @foreach ($tipusPlaçes as $tipus)
-                    <div class="relative z-0 w-full mb-5 group">
-                        <label for="tipus_placa_{{ $tipus->id }}" class="block text-sm text-gray-500 dark:text-gray-400">{{ $tipus->nom }}</label>
-                        <input type="number" name="num_places[{{ $tipus->id }}]" id="tipus_placa_{{ $tipus->id }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Número de places per aquest tipus" required min="0" value="{{ old('num_places.' . $tipus->id) }}">
+                    <div class="relative z-0 w-full mb-2.5 group">
+                        <input type="number" name="num_places[{{ $tipus->id }}]" id="tipus_placa_{{ $tipus->id }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required min="0" value="{{ old('num_places.' . $tipus->id) }}">
+                        <label for="tipus_placa_{{ $tipus->id }}" class="peer-focus:font-medium absolute text-xs text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ $tipus->nom }}</label>
                     </div>
                 @endforeach
             </div>

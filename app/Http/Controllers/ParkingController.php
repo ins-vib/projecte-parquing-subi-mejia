@@ -57,19 +57,34 @@ class ParkingController extends Controller
         $parking = Parking::create($validatedData);
 
         $numPlantes = $validatedData['num_plantes'];
-        $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
 
         $numeroPlaça = 1;
+        $plaçesPerTipus = [];
+        foreach ($validatedData['num_places'] as $tipus_id => $quantitatTotal) {
+            $plaçesPerTipus[$tipus_id] = [
+                'per_planta' => intdiv($quantitatTotal, $numPlantes),
+                'restant' => $quantitatTotal % $numPlantes
+            ];
+        }
+
         for ($i = 1; $i <= $numPlantes; $i++) {
             $zona = Zona::create([
                 'parking_id' => $parking->id,
                 'nom' => 'Planta ' . $parking->name . ' ' . $i,
-                'capacitatTotal' => $capacitatPerPlanta,
+                'capacitatTotal' => 0,
                 'estat' => true,
             ]);    
 
-            foreach ($validatedData['num_places'] as $tipus_id => $quantitat) {
-                for ($j = 0; $j < $quantitat / $numPlantes; $j++) {
+            $capacitatZona = 0;
+
+            foreach ($plaçesPerTipus as $tipus_id => &$data) {
+                $quantitat = $data['per_planta'];
+                if ($data['restant'] > 0) {
+                    $quantitat += 1;
+                    $data['restant'] -= 1;
+                }
+
+                for ($j = 0; $j < $quantitat; $j++) {
                     Plaza::create([
                         'numero' => 'Numero ' . $numeroPlaça++,
                         'tipus_id' => $tipus_id,
@@ -77,7 +92,11 @@ class ParkingController extends Controller
                         'zona_id' => $zona->id,
                     ]);
                 }
-            }    
+
+                $capacitatZona += $quantitat;
+            }
+
+            $zona->update(['capacitatTotal' => $capacitatZona]);
         }
         return redirect('/parkings')->with('parkings.llista');
     }
