@@ -107,8 +107,8 @@ class ParkingController extends Controller
 
     public function formEditar($id) {
         $parkings=Parking::find($id);
-
-        return view("parkings.editar")->with('parkings', $parkings);
+        $tipusPlaçes = Tipusplaçes::all();
+        return view("parkings.editar")->with('parkings', $parkings)->with('tipusPlaçes', $tipusPlaçes);
     }
 
     public function editar(Request $request, $id) {
@@ -123,49 +123,65 @@ class ParkingController extends Controller
             'horaObertura' => 'required',
             'horaTancament' => 'required',
             'num_plantes' => 'required',
+            'tipus_id' => 'required',
+            'num_places' => 'required',
         ]);
 
-        $parkings=Parking::find($id);
+        $sumaPlaces = array_sum($validatedData['num_places']);
+        if ($sumaPlaces != $validatedData['capacitat']) {
+            return back()->withErrors(['num_places' => 'La suma de les places ha de ser igual a la capacitat total.'])->withInput();
+        }
 
-        $parkings->name = $validatedData['name'];
-        $parkings->address = $validatedData['address'];
-        $parkings->ciutat = $validatedData['ciutat'];
-        $parkings->capacitat = $validatedData['capacitat'];
-        $parkings->longitud = $validatedData['longitud'];
-        $parkings->latitud = $validatedData['latitud'];
-        $parkings->horaObertura = $validatedData['horaObertura'];
-        $parkings->horaTancament = $validatedData['horaTancament'];
-
-        $parkings->save();
+        $parkings=Parking::findOrFail($id);
+        $parkings->update($validatedData);
 
         $numPlantes = $validatedData['num_plantes'];
-        $capacitatPerPlanta = floor($validatedData['capacitat'] / $numPlantes);
 
-        $zonesExistents = $parkings->zonas;
-
-        if ($zonesExistents->count() > $numPlantes) {
-            $zonesExistents->slice($numPlantes)->each(function($zona) {
-                $zona->delete();
-            });
+        Plaza::whereIn('zona_id', Zona::where('parking_id', $id)->pluck('id'))->delete();
+        Zona::where('parking_id', $id)->delete();
+       
+        $numeroPlaça = 1;
+        $plaçesPerTipus = [];
+        foreach ($validatedData['num_places'] as $tipus_id => $quantitatTotal) {
+            $plaçesPerTipus[$tipus_id] = [
+                'per_planta' => intdiv($quantitatTotal, $numPlantes),
+                'restant' => $quantitatTotal % $numPlantes
+            ];
         }
 
-        foreach ($zonesExistents as $index => $zona) {
-            if ($index < $numPlantes) {
-                $zona->capacitatTotal = $capacitatPerPlanta;
-                $zona->save();
-            }
-        }
-
-        for ($i = $zonesExistents->count(); $i < $numPlantes; $i++) {
-            Zona::create([
+        for ($i = 1; $i <= $numPlantes; $i++) {
+            $zona = Zona::create([
                 'parking_id' => $parkings->id,
-                'nom' => 'Planta ' . ($i + 1),
-                'capacitatTotal' => $capacitatPerPlanta,
+                'nom' => 'Planta ' . $parkings->name . ' ' . $i,
+                'capacitatTotal' => 0,
                 'estat' => true,
-            ]);
-    }
+            ]);    
 
-        return redirect('/parkings');
+            $capacitatZona = 0;
+
+            foreach ($plaçesPerTipus as $tipus_id => &$data) {
+                $quantitat = $data['per_planta'];
+                if ($data['restant'] > 0) {
+                    $quantitat += 1;
+                    $data['restant'] -= 1;
+                }
+
+                for ($j = 0; $j < $quantitat; $j++) {
+                    Plaza::create([
+                        'numero' => 'Numero ' . $numeroPlaça++,
+                        'tipus_id' => $tipus_id,
+                        'estat' => true,
+                        'zona_id' => $zona->id,
+                    ]);
+                }
+
+                $capacitatZona += $quantitat;
+            }
+
+            $zona->update(['capacitatTotal' => $capacitatZona]);
+        }
+
+        return redirect('/parkings')->with('success', 'Parking actualitzat correctament');
     }
 
     public function eliminar($id){
