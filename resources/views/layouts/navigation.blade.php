@@ -28,6 +28,10 @@
                     <x-nav-link :href="route('cotxes.llista')" :active="request()->routeIs('cotxes.llista')">
                         {{ __('Cotxes') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('tarifes.llista')" :active="request()->routeIs('tarifes.llista')">
+                        {{ __('Tarifes') }}
+                    </x-nav-link>
                     @endif
 
                     @if(Auth::user()->isNormal)

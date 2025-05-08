@@ -24,7 +24,7 @@ return new class extends Migration
             $table->time('horaTancament');
             $table->integer('num_plantes');
             $table->foreignId('tipus_id')->constrained('tipusparking');
-            $table->foreignId('tarifa_id')->constrained('tarifa');
+            $table->foreignId('tarifa_id')->nullable()->constrained('tarifa')->nullOnDelete();
             $table->timestamps();
         });
     }

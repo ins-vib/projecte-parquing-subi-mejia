@@ -9,6 +9,7 @@ use App\Http\Controllers\PlateController;
 use App\Http\Controllers\AparcarController;
 use App\Http\Controllers\CotxesController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TarifaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,6 +50,11 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
     Route::get('/parkings/{id}/imatges', [ParkingController::class, 'mostrarImatges'])->name('parkings.imatges');
     Route::post('/parkings/pujar-imatges', [ParkingController::class, 'pujarImatges'])->name('parkings.pujarImatges');
+
+    Route::get('/tarifes', [TarifaController::class, 'llista'])->name('tarifes.llista');
+    Route::get('/tarifes/afegir', [TarifaController::class, 'formAfegir'])->name('tarifes.afegir');
+    Route::post('/tarifes/afegir', [TarifaController::class, 'afegirEnviar'])->name('tarifes.afegir');
+    Route::get('/tarifes/eliminar/{id}', [TarifaController::class, 'eliminar'])->name('tarifes.eliminar');
 });
 
 

@@ -9,6 +9,7 @@ use App\Models\Plaza;
 use App\Models\Cotxe;
 use App\Models\Imatge;
 use App\Models\Tipusplaçes;
+use App\Models\Tarifa;
 
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,8 @@ class ParkingController extends Controller
 
     public function formAfegir() {
         $tipusPlaçes = Tipusplaçes::all(); 
-        return view("parkings.afegir")->with('tipusPlaçes', $tipusPlaçes);
+        $tarifes = Tarifa::all();
+        return view("parkings.afegir")->with('tipusPlaçes', $tipusPlaçes)->with('tarifes', $tarifes);
     }
 
     public function afegir(Request $request) {
@@ -108,7 +110,8 @@ class ParkingController extends Controller
     public function formEditar($id) {
         $parkings=Parking::find($id);
         $tipusPlaçes = Tipusplaçes::all();
-        return view("parkings.editar")->with('parkings', $parkings)->with('tipusPlaçes', $tipusPlaçes);
+        $tarifes = Tarifa::all();
+        return view("parkings.editar")->with('parkings', $parkings)->with('tipusPlaçes', $tipusPlaçes)->with('tarifes', $tarifes);
     }
 
     public function editar(Request $request, $id) {
@@ -125,6 +128,7 @@ class ParkingController extends Controller
             'num_plantes' => 'required',
             'tipus_id' => 'required',
             'num_places' => 'required',
+            'tarifa_id' => 'required',
         ]);
 
         $sumaPlaces = array_sum($validatedData['num_places']);
