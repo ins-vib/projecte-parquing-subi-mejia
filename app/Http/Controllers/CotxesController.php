@@ -47,4 +47,22 @@ class CotxesController extends Controller
         $cotxes->delete();
         return redirect()->route('cotxes.llista');
     }
+
+    public function cotxeEditar($id) {
+        $cotxes = Cotxe::findOrFail($id);
+        $users = User::all();
+        return view('cotxes.editar')->with('cotxes', $cotxes)->with('users', $users);
+    }
+
+    public function cotxeEditarEnviar($id, Request $request) {
+        $validatedData = $request->validate([
+            'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
+            'marca_cotxe' => 'required|string|max:25',
+            'model_cotxe' => 'required|string|max:25',
+            'user_id' => 'required|exists:users,id',
+        ]);
+        $cotxe = Cotxe::findOrFail($id);
+        $cotxe->update($validatedData);
+        return redirect()->route('cotxes.llista');
+    }
 }
