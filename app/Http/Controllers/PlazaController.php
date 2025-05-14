@@ -23,4 +23,11 @@ class PlazaController extends Controller
         $plaçes = Plaza::where('zona_id', $id)->paginate(15);
         return view('plaza.planta')->with('planta', $planta)->with('plaçes', $plaçes);
     }
+
+    public function bloq($id, Request $request,) {
+        $plaça = Plaza::findOrFail($id);
+        $plaça->bloquejat = $request->input('bloquejat');
+        $plaça->save();
+        return response()->json(['success' => true]);
+    }
 }

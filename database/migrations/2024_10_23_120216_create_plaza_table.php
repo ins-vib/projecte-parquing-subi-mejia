@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('numero');
             $table->foreignId('tipus_id')->constrained('tipusplaçes')->onDelete('cascade');;
             $table->boolean('estat');
+            $table->boolean('bloquejat')->default(false);
             $table->foreignId('zona_id')->constrained();
             $table->foreignId('cotxe_id')->nullable()->constrained()->onDelete('set null');
             $table->integer('entrada_timestamp')->nullable();
