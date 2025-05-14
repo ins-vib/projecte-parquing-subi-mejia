@@ -51,6 +51,15 @@
                             <input type="text" name="model_cotxe" id="model_cotxe" value="{{ old('model_cotxe') }}" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                         </div>
                         <br>
+                        <div>
+                            <label style="text-align:center" for="tipus_vehicle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipus de vehicle</label>
+                            <select name="tipus_vehicle" id="tipus_vehicle" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                <option value="cotxe" {{ old('tipus_vehicle') == 'cotxe' ? 'selected' : '' }}>Cotxe</option>
+                                <option value="moto" {{ old('tipus_vehicle') == 'moto' ? 'selected' : '' }}>Moto</option>
+                                <option value="other" {{ old('tipus_vehicle') == 'other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                        </div>
+                        <br>
 
                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir</button>
                     </form>

@@ -14,7 +14,8 @@ class Cotxe extends Model
         'matricula',
         'marca_cotxe',
         'model_cotxe',
-        'user_id'
+        'user_id',
+        'tipus_vehicle'
     ];
     public function plazas() {
         return $this->hasMany(Plaza::class);

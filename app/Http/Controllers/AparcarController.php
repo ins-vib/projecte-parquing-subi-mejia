@@ -77,6 +77,7 @@ class AparcarController extends Controller
             'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
             'marca_cotxe' => 'required|string|max:25',
             'model_cotxe' => 'required|string|max:25',
+            'tipus_vehicle' => 'required|in:cotxe,moto,other',
         ]);
         $validatedData['user_id'] = auth()->id();
         
@@ -95,6 +96,7 @@ class AparcarController extends Controller
             'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
             'marca_cotxe' => 'required|string|max:25',
             'model_cotxe' => 'required|string|max:25',
+            'tipus_vehicle' => 'required|in:cotxe,moto,other',
         ]);
         $validatedData['user_id'] = auth()->id();
         
