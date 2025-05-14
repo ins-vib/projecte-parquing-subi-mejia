@@ -145,6 +145,12 @@ class AparcarController extends Controller
     }
 
     public function enviaraparcarParkingPlazas($id, Request $request) {
+        $cotxeId = $request->cotxe_id;
+        $cotxeJaAparcat = Plaza::where('cotxe_id', $cotxeId)->where('estat', 0)->exists();
+        if ($cotxeJaAparcat) {
+            return redirect()->back()->withErrors(['error' => 'Aquest cotxe ja està aparcat.']);
+        }
+
         $plaça = Plaza::findOrFail($id); 
         $parking = Parking::findOrFail($plaça->zona->parking_id);
         $parking->plaçes_ocupades = $parking->plaçes_ocupades + 1;

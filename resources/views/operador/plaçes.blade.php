@@ -18,6 +18,13 @@
     </x-slot>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">
+    @if ($errors->any())
+        <div class="bg-red-200 text-red-700 p-2 rounded">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-black">
             <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
             <label for="table-search" class="sr-only">Search</label>
@@ -31,7 +38,9 @@
                 <tr >
                     <td class="px-6 py-4">{{$plaça->numero}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800" style="background-color: {{ $plaça->estat ? '' : 'red' }};">
-                        @if ($plaça->estat)
+                        @if ($plaça->bloquejat)
+                        <span class="text-red-600">Plaça bloquejada</span>
+                        @elseif ($plaça->estat)
                             <form method="POST" action="/aparcar/operador/{{$plaça->id}}">
                                 @csrf
                                 <input type="hidden" name="cotxe_id" value="{{ $cotxe->id }}">
