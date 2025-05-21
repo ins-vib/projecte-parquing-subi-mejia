@@ -37,6 +37,8 @@
                             <label style="text-align:center" for="matricula" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matricula:</label>
                             <input type="text" name="matricula" id="matricula" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('matricula') }}" required>
                         </div>
+                        <div id="teclatVirtual" class="grid grid-cols-10 gap-1 text-center mt-2">
+                        </div>
                         <br>
 
                         <div>
@@ -57,6 +59,8 @@
                                 <option value="moto" {{ old('tipus_vehicle') == 'moto' ? 'selected' : '' }}>Moto</option>
                                 <option value="other" {{ old('tipus_vehicle') == 'other' ? 'selected' : '' }}>Other</option>
                             </select>
+                            <div id="imatgeVehicle" class="mt-4 flex justify-center">
+                            </div>
                         </div>
                         <br>
                         <div>
@@ -108,6 +112,41 @@
                     }
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+        const teclat = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const teclatContenidor = document.getElementById("teclatVirtual");
+        const inputMatricula = document.getElementById("matricula");
+            teclat.split('').forEach(char => {
+                const btn = document.createElement("button");
+                btn.setAttribute("type", "button");
+                btn.textContent = char;
+                btn.className = "bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-3 rounded";
+                btn.addEventListener("click", () => {
+                    if (inputMatricula.value.length < 7) {
+                        inputMatricula.value += char;
+                    }
+                });
+                teclatContenidor.appendChild(btn);
+            });
+        const tipusSelect = document.getElementById('tipus_vehicle');
+        const imatgeContainer = document.getElementById('imatgeVehicle');
+
+        const imatges = {
+            cotxe: '🚗',
+            moto: '🏍️',
+            other: '🚙'
+        };
+        function actualitzaImatge() {
+            const valor = tipusSelect.value;
+            const emoji = imatges[valor] || '❓';
+            imatgeContainer.innerHTML = `
+                <div class="text-6xl">${emoji}</div>
+            `;
+        }
+        actualitzaImatge();
+        tipusSelect.addEventListener('change', actualitzaImatge);
         });
     </script>
 </x-app-layout>
