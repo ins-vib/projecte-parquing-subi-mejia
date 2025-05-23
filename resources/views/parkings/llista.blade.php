@@ -95,7 +95,7 @@
 
         @foreach($parkings as $parking)
             L.marker([{{ $parking->latitud }}, {{ $parking->longitud }}]).addTo(map)
-                .bindPopup('{{ $parking->name }}');
+                .bindPopup('<a href="/parkings/informacio/{{$parking->id}}">{{ $parking->name }}</a> <p>Capacitat: {{$parking->capacitat}} </p> <p>Plaçes lliures: {{$parking->capacitat - $parking->plaçes_ocupades}}</p>');
         @endforeach
 
     </script>
