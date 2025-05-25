@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreignId('cotxe_id')->nullable()->constrained()->onDelete('set null');
             $table->integer('entrada_timestamp')->nullable();
             $table->integer('sortida_timestamp')->nullable();
+            $table->decimal('coordenada_x', 10, 5)->nullable();
+            $table->decimal('coordenada_y', 10, 5)->nullable();
             $table->timestamps();
         });
     }

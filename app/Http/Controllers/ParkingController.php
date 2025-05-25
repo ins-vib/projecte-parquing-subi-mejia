@@ -58,6 +58,9 @@ class ParkingController extends Controller
 
         $parking = Parking::create($validatedData);
 
+        $latitudBase = $parking->latitud;
+        $longitudBase = $parking->longitud;
+
         $numPlantes = $validatedData['num_plantes'];
 
         $numeroPlaça = 1;
@@ -68,6 +71,8 @@ class ParkingController extends Controller
                 'restant' => $quantitatTotal % $numPlantes
             ];
         }
+
+        $offset = 0.00002;
 
         for ($i = 1; $i <= $numPlantes; $i++) {
             $zona = Zona::create([
@@ -92,6 +97,8 @@ class ParkingController extends Controller
                         'tipus_id' => $tipus_id,
                         'estat' => true,
                         'zona_id' => $zona->id,
+                        'coordenada_x' => $longitudBase + ($numeroPlaça * $offset),
+                        'coordenada_y' => $latitudBase + ($i * $offset),
                     ]);
                 }
 

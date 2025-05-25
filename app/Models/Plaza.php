@@ -13,7 +13,9 @@ class Plaza extends Model
         'numero',
         'tipus_id', 
         'estat', 
-        'zona_id'
+        'zona_id',
+        'coordenada_x',
+        'coordenada_y',
     ];
 
     public function zona() {
