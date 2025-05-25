@@ -10,6 +10,7 @@ use App\Http\Controllers\AparcarController;
 use App\Http\Controllers\CotxesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TarifaController;
+use App\Http\Controllers\TransaccioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +60,8 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/tarifes/afegir', [TarifaController::class, 'formAfegir'])->name('tarifes.afegir');
     Route::post('/tarifes/afegir', [TarifaController::class, 'afegirEnviar'])->name('tarifes.afegir');
     Route::get('/tarifes/eliminar/{id}', [TarifaController::class, 'eliminar'])->name('tarifes.eliminar');
+
+    Route::get('/transaccions', [TransaccioController::class, 'llista'])->name('transaccions.llista');
 });
 
 

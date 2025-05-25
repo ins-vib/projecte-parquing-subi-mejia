@@ -32,6 +32,10 @@
                     <x-nav-link :href="route('tarifes.llista')" :active="request()->routeIs('tarifes.llista')">
                         {{ __('Tarifes') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('transaccions.llista')" :active="request()->routeIs('transaccions.llista')">
+                        {{ __('Transaccions') }}
+                    </x-nav-link>
                     @endif
 
                     @if(Auth::user()->isNormal)

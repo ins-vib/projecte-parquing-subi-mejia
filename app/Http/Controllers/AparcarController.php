@@ -7,6 +7,8 @@ use App\Models\Parking;
 use App\Models\Plaza;
 use App\Models\Zona;
 use App\Models\Cotxe;
+use App\Models\Transaccio;
+use Carbon\Carbon;
 
 class AparcarController extends Controller
 {
@@ -162,11 +164,17 @@ class AparcarController extends Controller
         $plaça->entrada_timestamp = time();
         $plaça->save();    
         $parking->save();
+        Transaccio::create([
+        'plaza_id' => $plaça->id,
+        'cotxe_id' => $request->cotxe_id,
+        'hora_entrada' => Carbon::now(),
+    ]);
         return redirect()->back();
     }
 
     public function desaparcar($id) {
         $plaça = Plaza::findOrFail($id); 
+        $cotxe = $plaça->cotxe;
         $parking = Parking::findOrFail($plaça->zona->parking_id);
         $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
 
@@ -174,6 +182,15 @@ class AparcarController extends Controller
         $plaça->sortida_timestamp = time();
         $plaça->save();    
         $parking->save();
+        $transaccio = Transaccio::where('plaza_id', $plaça->id)->where('cotxe_id', $cotxe->id)->whereNull('hora_sortida')->latest()->first();
+
+        if ($transaccio) {
+        $transaccio->hora_sortida = now();
+        $minuts = $transaccio->hora_entrada->diffInMinutes($transaccio->hora_sortida);
+        $tarifa = $parking->tarifa->preu;
+        $transaccio->import = $minuts/60 * $tarifa;
+        $transaccio->save();
+    }
         return redirect()->route('tickets.ticket', $id);
     }
 
