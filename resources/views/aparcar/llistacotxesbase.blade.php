@@ -46,6 +46,7 @@
                     <td class="px-6 py-4">{{$cotxe->matricula}}</td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$cotxe->marca_cotxe}}</td>
                     <td class="px-6 py-4">{{$cotxe->model_cotxe}}</td>
+                    <td class="px-6 py-4 bg-gray-50 text-blue-600 dark:text-blue-500 hover:underline"><a href="/cotxes/editar/{{$cotxe->id}}">Editar Informació</a></td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"><a  class="px-6 py-4 bg-gray-50 dark:bg-gray-800 font-medium text-red-600 dark:text-red-500 hover:underline ms-3" href="/cotxes/eliminar/{{$cotxe->id}}">Eliminar</a></td>
                 </tr>
                 @endforeach

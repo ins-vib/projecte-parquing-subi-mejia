@@ -115,6 +115,24 @@ class AparcarController extends Controller
         return redirect()->back();
     }
 
+    public function editarCotxe($id) {
+        $cotxes = Cotxe::findOrFail($id);
+        return view('aparcar.editarcotxe')->with('cotxes', $cotxes);
+    }
+
+    public function editarCotxeEnviar($id, Request $request) {
+        $validatedData = $request->validate([
+            'matricula' => ['required', 'regex:/^[0-9]{4}[A-Z]{3}$/'],
+            'marca_cotxe' => 'required|string|max:25',
+            'model_cotxe' => 'required|string|max:25',
+            'tipus_vehicle' => 'required|in:cotxe,moto,other',
+        ]);
+        $validatedData['user_id'] = auth()->id();
+        $cotxe = Cotxe::findOrFail($id);
+        $cotxe->update($validatedData);
+        return redirect()->route('aparcar.llistacotxesbase');
+    }
+
     public function aparcarCotxes($id, Request $request) {
         $buscar = request('buscar');        
         $parking = Parking::findOrFail($id);

@@ -61,6 +61,7 @@ class CotxesController extends Controller
             'marca_cotxe' => 'required|string|max:25',
             'model_cotxe' => 'required|string|max:25',
             'user_id' => 'required|exists:users,id',
+            'tipus_vehicle' => 'required|in:cotxe,moto,other',
         ]);
         $cotxe = Cotxe::findOrFail($id);
         $cotxe->update($validatedData);

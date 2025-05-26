@@ -23,7 +23,7 @@
                     <h1 style="text-align:center" class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Editar les dades del teu cotxe:
                     </h1>
-                    <form class="space-y-4 md:space-y-6" method="post" action="/cotxes/editar/{{$cotxes->id}}">
+                    <form class="space-y-4 md:space-y-6" method="post" action="{{ route('aparcar.editarcotxe', $cotxes->id) }}">
                         @csrf
                         @if ($errors->has('matricula'))
                             <div class="text-red-500 text-sm">
@@ -59,20 +59,6 @@
                                 <option value="other" {{ old('tipus_vehicle') == 'other' ? 'selected' : '' }}>Other</option>
                             </select>
                             <div id="imatgeVehicle" class="mt-4 flex justify-center">
-                            </div>
-                        </div>
-                        <br>
-                        <div>
-                            <label style="text-align:center" for="user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select User:</label>
-                            
-                            <div class="relative">
-                                <input type="text" id="buscarUsuari" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cerca usuari per nom o email...">
-                                <select name="user_id" id="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                                    <option value="">Usuari</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ $cotxes->user_id == $user->id ? 'selected' : '' }} class="user-option">{{ $user->name }} - {{ $user->email }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
 

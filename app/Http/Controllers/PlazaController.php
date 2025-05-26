@@ -26,7 +26,17 @@ class PlazaController extends Controller
 
     public function bloq($id, Request $request,) {
         $plaça = Plaza::findOrFail($id);
-        $plaça->bloquejat = $request->input('bloquejat');
+        $parking = Parking::findOrFail($plaça->zona->parking_id);
+        $nouEstat = $request->bloquejat;
+        if ($nouEstat == 1 && $plaça->bloquejat == 0) {
+            $parking->plaçes_ocupades = $parking->plaçes_ocupades + 1;
+            $parking->save();
+        }
+        else if ($nouEstat == 0 && $plaça->bloquejat == 1) {
+            $parking->plaçes_ocupades = $parking->plaçes_ocupades - 1;
+            $parking->save();
+        }
+        $plaça->bloquejat = $nouEstat;
         $plaça->save();
         return response()->json(['success' => true]);
     }
