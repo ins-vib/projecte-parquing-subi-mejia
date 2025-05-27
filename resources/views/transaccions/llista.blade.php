@@ -47,6 +47,9 @@
                 </table>
             </div>
         </div>
+        <div>
+            {{ $transaccions->links() }}
+        </div>
         </div>
 
 </x-app-layout>

@@ -46,4 +46,8 @@
         </div>
     </div>
 
+<div>
+ {{ $tarifes->links() }}
+</div>
+
 </x-app-layout>
