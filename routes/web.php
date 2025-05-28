@@ -49,6 +49,11 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
     Route::get('/plaçes/planta/{id}', [PlazaController::class,'mostrarPlaçes'])->name('plaza.planta');
     Route::post('/plaçes/{id}/bloq', [PlazaController::class, 'bloq']);
+    Route::get('/plaçes/afegir', [PlazaController::class, 'afegirForm'])->name('plaza.afegir');
+    Route::post('/plaçes/afegir', [PlazaController::class, 'afegir'])->name('plaza.afegir');
+    Route::get('/plaçes/eliminar/{id}', [PlazaController::class, 'eliminar'])->name('plaza.eliminar');
+    Route::get('/plaza/{id}/editar', [PlazaController::class, 'editarForm'])->name('plaza.editarForm');
+    Route::post('/plaza/{id}/editar', [PlazaController::class, 'editar'])->name('plaza.editar');
 
     Route::get('/cotxes', [CotxesController::class,'llista'])->name('cotxes.llista');
     Route::get('/cotxes/afegir/admin', [CotxesController::class,'cotxeAfegirAdmin'])->name('cotxes.afegircotxeadmin');

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Plantes
+            Plaçes
         </h2>
         <h1>
             <div id="clock" style="color: rgb(134, 125, 125); text-align: left;"></div>
@@ -16,6 +16,9 @@
             </script>
         </h1>
     </x-slot>
+    <div style="margin: 1%">
+        <a href="/plaçes/afegir" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Afegir plaça</a> 
+    </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="margin: 1%">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-black">
@@ -25,7 +28,7 @@
                 <th scope="col" class="px-6 py-3">Numero Plaça</th>
                 <th scope="col" class="px-6 py-3">id Planta</th>
                 <th scope="col" class="px-6 py-3">Tipus</th>
-                <th scope="col" class="px-6 py-3">Estat</th>
+                <th scope="col" class="px-6 py-3" colspan="3">Estat</th>
             </tr>
         </thead>
         <tbody >
@@ -35,6 +38,8 @@
                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{{$plaça->zona_id}}</td>
                 <td class="px-6 py-4">{{$plaça->tipusplaça->nom}}</td>
                 <td class="px-6 py-4 text-white font-bold text-center" style="border: solid black 1px; background-color: {{ $plaça->bloquejat ? 'red' : ($plaça->estat ? 'green' : 'red') }};">{{ $plaça->bloquejat ? 'Bloquejat' : '' }}</td>
+                <td class="px-6 py-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"><a href="{{ route('plaza.editar', ['id' => $plaça->id]) }}">Editar</a></td>
+                <td class="px-6 py-4font-medium text-red-600 dark:text-red-500 hover:underline ms-3"><a href="{{ route('plaza.eliminar', ['id' => $plaça->id]) }}">Eliminar</a></td>
             @endforeach
             
         </tbody>

@@ -40,4 +40,75 @@ class PlazaController extends Controller
         $plaça->save();
         return response()->json(['success' => true]);
     }
+
+    public function afegirForm() {
+        $zones = Zona::with('parking')->get();
+        $tipusPlaces = Tipusplaçes::all();
+        return view('plaza.afegir')->with('zones', $zones)->with('tipusPlaces', $tipusPlaces);
+    }
+
+   public function afegir(Request $request) {
+        $request->validate([
+            'zona_id' => 'required|exists:zonas,id',
+            'tipus_id' => 'required|exists:tipusplaçes,id',
+            'numero' => 'required|integer|min:1',
+        ]);
+
+        $zona = Zona::findOrFail($request->zona_id);
+        $parking = $zona->parking;
+
+        Plaza::create([
+            'zona_id' => $zona->id,
+            'tipus_id' => $request->tipus_id,
+            'numero' => $request->numero,
+            'estat' => 1,
+            'bloquejat' => 0,
+        ]);
+
+        $zona->capacitatTotal += 1;
+        $zona->save();
+
+        $parking->capacitat += 1;
+        $parking->save();
+
+        return redirect()->route('zona.llista')->with('success', 'Plaça afegida correctament');
+    }
+
+    public function eliminar($id) {
+        $plaza = Plaza::findOrFail($id);
+        $zona = $plaza->zona;
+        $parking = $zona->parking;
+
+        $plaza->delete();
+
+        $zona->capacitatTotal = max(0, $zona->capacitatTotal - 1);
+        $zona->save();
+
+        $parking->capacitat = max(0, $parking->capacitat - 1);
+        $parking->save();
+
+        return redirect()->back()->with('success', 'Plaça eliminada correctament');
+    }
+
+    public function editarForm($id) {
+        $plaza = Plaza::findOrFail($id);
+        $tipus = TipusPlaçes::all();
+
+        return view('plaza.editar')->with('plaza', $plaza)->with('tipus', $tipus);
+    }
+
+    public function editar(Request $request, $id) {
+        $request->validate([
+            'tipus_id' => 'required|exists:tipusplaçes,id',
+            'numero' => 'required|string|max:255',
+        ]);
+
+        $plaza = Plaza::findOrFail($id);
+        $plaza->tipus_id = $request->tipus_id;
+        $plaza->numero = $request->numero;
+        $plaza->save();
+
+        return redirect()->route('zona.llista')->with('success', 'Plaça editada correctament');
+    }
+
 }
