@@ -39,6 +39,11 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     
     Route::get('/plantes', [ZonaController::class,'llista'])->name('zona.llista');
     Route::get('/plantes/llista/{id}', [ZonaController::class,'informacio'])->name('zona.informacio');
+    Route::get('/plantes/afegir', [ZonaController::class, 'formAfegir'])->name('zona.formAfegir');
+    Route::post('/plantes/afegir', [ZonaController::class, 'afegir'])->name('zona.afegir');
+    Route::get('/plantes/editar/{id}', [ZonaController::class, 'formEditar'])->name('zona.editar');
+    Route::post('/plantes/editar/{id}', [ZonaController::class, 'editar'])->name('zona.editar');
+    Route::get('/plantes/eliminar/{id}', [ZonaController::class, 'eliminar'])->name('zona.eliminar');
 
 
     Route::get('/plaçes', [PlazaController::class,'llista'])->name('plaza.llista');
